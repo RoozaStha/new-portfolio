@@ -1,4 +1,3 @@
-# Lav Thaiba - Online Portfolio
 
 This is the repository for Lav Thaiba's online portfolio. The portfolio showcases Lav Thaiba's skills, experience, and contact information.
 
