@@ -1,0 +1,262 @@
+/* ==========================================================================
+   motion.css  -  Step 1 of the portfolio upgrade
+   Load order: AFTER style.css and responsive.css (it deliberately overrides
+   a few hover rules from the original Browny template).
+
+   Contents
+   1. Design tokens
+   2. Accessibility: skip link + visible keyboard focus
+   3. Scroll progress bar (CSS-only, no JS)
+   4. Pre-reveal state (inert until motion.js adds .motion-ready in Step 2)
+   5. Micro-interactions (transform / opacity only, so no layout thrash)
+   6. Reduced-motion safety net
+   ========================================================================== */
+
+
+/* 1. Design tokens
+   -------------------------------------------------------------------------- */
+:root {
+  --m-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --m-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --m-fast: 0.2s;
+  --m-base: 0.45s;
+  --m-slow: 0.8s;
+  --m-brand: #0060c7;
+  --m-brand-bright: #007bff;
+}
+
+
+/* 2. Accessibility
+   -------------------------------------------------------------------------- */
+
+/* The template sets "outline: 0 !important" on buttons and inputs, which
+   removes the keyboard focus ring. This restores it for keyboard users only
+   (:focus-visible does not fire on mouse clicks). Two-tone ring so it stays
+   visible on both the white sections and the dark-blue hero. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--m-brand-bright) !important;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.85) !important;
+}
+
+/* Skip link. The HTML for it is added to index.html in this step. */
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 10001;
+  padding: 10px 16px;
+  background: #fff;
+  color: var(--m-brand);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 4px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+  translate: 0 -200%;
+  transition: translate var(--m-fast) var(--m-ease-out);
+}
+.skip-link:focus,
+.skip-link:focus-visible {
+  translate: 0 0;
+  color: var(--m-brand);
+}
+
+
+/* 3. Scroll progress bar
+   Uses scroll-driven animations (Chrome, Edge, Safari 26+). Browsers without
+   support simply do not show it; motion.js adds a fallback in Step 2.
+   -------------------------------------------------------------------------- */
+@supports (animation-timeline: scroll()) {
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    z-index: 10000;
+    pointer-events: none;
+    background: linear-gradient(90deg, var(--m-brand), var(--m-brand-bright), #6cc3ff);
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    animation: m-scroll-progress linear both;
+    animation-timeline: scroll(root block); /* must come after the shorthand */
+  }
+}
+@keyframes m-scroll-progress {
+  to { transform: scaleX(1); }
+}
+
+
+/* 4. Pre-reveal state
+   Elements tagged data-reveal start hidden ONLY when <html> has .motion-ready.
+   Without JS, or with reduced motion, that class is never added, so content is
+   always visible. motion.js animates opacity and position (Step 2).
+   -------------------------------------------------------------------------- */
+.motion-ready [data-reveal] {
+  opacity: 0;
+}
+
+
+/* 5. Micro-interactions
+   NOTE: animate.css leaves "transform: none" locked on elements it has
+   animated (animation-fill-mode: both), which blocks any :hover transform.
+   For those elements (.header-text a) the individual `translate` and `scale`
+   properties are used instead; they are separate from `transform`, so they
+   still work.
+   -------------------------------------------------------------------------- */
+
+/* 5a. Navigation underline (desktop) */
+nav.navbar.bootsnav ul.nav > li > a {
+  position: relative;
+  transition: color var(--m-fast) ease;
+}
+@media (min-width: 993px) {
+  nav.navbar.bootsnav ul.nav > li > a::after {
+    content: "";
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    bottom: 24px;
+    height: 2px;
+    background: var(--m-brand);
+    transform: scaleX(0);
+    transform-origin: 100% 50%;
+    transition: transform var(--m-base) var(--m-ease-out);
+  }
+  nav.navbar.bootsnav ul.nav > li > a:hover::after,
+  nav.navbar.bootsnav ul.nav > li > a:focus-visible::after,
+  nav.navbar.bootsnav ul.nav > li.active > a::after {
+    transform: scaleX(1);
+    transform-origin: 0 50%;
+  }
+}
+
+/* 5b. Hero call-to-action */
+.header-text a {
+  transition:
+    translate var(--m-base) var(--m-ease-out),
+    scale var(--m-fast) var(--m-ease-out),
+    box-shadow var(--m-base) var(--m-ease-out),
+    background-color var(--m-fast) ease,
+    border-color var(--m-fast) ease;
+}
+.header-text a:hover {
+  translate: 0 -3px;
+}
+.header-text a:active {
+  translate: 0 0;
+  scale: 0.98;
+}
+
+/* 5c. Contact submit button and quote button */
+.single-contact-btn {
+  transition:
+    translate var(--m-base) var(--m-ease-out),
+    background-color var(--m-fast) ease,
+    border-color var(--m-fast) ease,
+    box-shadow var(--m-base) var(--m-ease-out);
+}
+.single-contact-btn:hover {
+  translate: 0 -2px;
+}
+.single-contact-btn:active {
+  translate: 0 0;
+  scale: 0.99;
+}
+
+.quote {
+  transition:
+    translate var(--m-fast) var(--m-ease-out),
+    scale var(--m-fast) var(--m-ease-out),
+    filter var(--m-fast) ease;
+}
+.quote:hover {
+  translate: 0 -2px;
+  filter: brightness(1.12);
+}
+.quote:active {
+  translate: 0 0;
+  scale: 0.97;
+}
+
+/* 5d. Certification cards: gentler image zoom (was 1.5x), fade-in overlay,
+       and the overlay also opens for keyboard focus, not just mouse hover */
+.isotope .item img {
+  transition: transform var(--m-slow) var(--m-ease-out);
+}
+.isotope .item:hover img,
+.isotope .item:focus-within img {
+  transform: scale(1.08);
+}
+.isotope-overlay {
+  transform: none;
+  opacity: 0;
+  transition: opacity var(--m-base) var(--m-ease-out);
+}
+.isotope .item:hover .isotope-overlay,
+.isotope .item:focus-within .isotope-overlay {
+  transform: none;
+  opacity: 1;
+}
+
+/* 5e. Profile tiles: same overlay for keyboard focus as for hover */
+.single-profile:focus-within .single-profile-overlay {
+  transform: scale(1);
+  top: 0;
+}
+.single-profile:focus-within .profile-icon-name,
+.single-profile:focus-within .profile-txt a > i {
+  color: #fff;
+}
+
+/* 5f. Back-to-top button */
+#scroll-Top .return-to-top {
+  transition:
+    translate var(--m-base) var(--m-ease-out),
+    background-color var(--m-base) ease,
+    color var(--m-base) ease;
+}
+#scroll-Top .return-to-top:hover {
+  translate: 0 -3px;
+}
+
+
+/* 6. Reduced-motion safety net
+   Does not remove animations that carry meaning; it shortens them to ~0 so
+   elements still land in their final state (animate.css uses fill-mode:both,
+   so the hero text still ends fully visible). motion.js applies its own
+   reduced-motion branch in Step 2.
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
+  body::before {
+    display: none; /* scroll-linked bar is hidden for motion-sensitive users */
+  }
+  .header-text a:hover,
+  .single-contact-btn:hover,
+  .quote:hover,
+  #scroll-Top .return-to-top:hover {
+    translate: 0 0;
+  }
+  .isotope .item:hover img,
+  .isotope .item:focus-within img {
+    transform: none;
+  }
+}
