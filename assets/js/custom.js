@@ -45,8 +45,14 @@ $(document).ready(function(){
 		$('li.smooth-menu a').bind("click", function(event) {
 			event.preventDefault();
 			var anchor = $(this);
+			var top = $(anchor.attr('href')).offset().top;
+			// Reduced motion (or motion.js inactive): jump instead of animating
+			if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+				$('html, body').scrollTop(top);
+				return;
+			}
 			$('html, body').stop().animate({
-				scrollTop: $(anchor.attr('href')).offset().top - 0
+				scrollTop: top
 			}, 1200,'easeInOutExpo');
 		});
 		
@@ -113,4 +119,5 @@ $(document).ready(function(){
 
     // 5. Hero intro animation now lives in assets/js/motion.js (GSAP).
 
-});
+});	
+	
