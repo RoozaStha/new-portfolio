@@ -98,6 +98,15 @@
 	
 	<body>
 		<a class="skip-link" href="#about">Skip to content</a>
+
+		<!-- Page loader (visible only while motion is enabled) -->
+		<div class="page-loader" aria-hidden="true">
+			<div class="pl-inner">
+				<span class="pl-mark">R<b>S</b></span>
+				<span class="pl-bar"><i></i></span>
+			</div>
+		</div>
+		<div class="cursor-glow" aria-hidden="true"></div>
 	
 		<!-- Google Tag Manager (noscript) -->
 		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WFBPQ69S"
@@ -151,20 +160,42 @@
 	
 		<!--welcome-hero start -->
 		<section id="welcome-hero" class="welcome-hero">
+			<canvas class="hero-canvas" aria-hidden="true"></canvas>
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12 text-center">
 						<div class="header-text">
-							<h2 data-reveal="hero">hello <span>,</span> I am <br> ROJA <br> SHRESTHA <span>.</span>   </h2>
-							<p data-reveal="hero">ERP Business Analyst &middot; Odoo Functional Consultant</p>
-							<a href="#contact" data-reveal="hero">Let's Talk</a>
+							<h2 class="hero-title" aria-label="Hello, I am Roja Shrestha">
+								<span class="ht-line" aria-hidden="true">hello <span class="ht-accent">,</span> I am</span>
+								<span class="ht-line" aria-hidden="true" data-split>ROJA</span>
+								<span class="ht-line" aria-hidden="true" data-split>SHRESTHA<span class="ht-accent">.</span></span>
+							</h2>
+							<p class="hero-role" data-reveal="hero">ERP Business Analyst &middot; Odoo Functional Consultant</p>
+							<p class="hero-focus" data-reveal="hero"><span class="hf-label">I work on</span> <span class="hf-window" data-rotate><span class="hf-word">Requirement gathering</span><span class="hf-word">Gap analysis</span><span class="hf-word">Odoo configuration</span><span class="hf-word">UAT &amp; user training</span><span class="hf-word">Functional documentation</span></span></p>
+							<div class="hero-actions" data-reveal="hero">
+								<a href="#contact">Let's Talk</a>
+								<a href="#projects" class="hero-btn-ghost">View Projects</a>
+							</div>
 						</div><!--/.header-text-->
 					</div><!--/.col-->
 				</div><!-- /.row-->
 			</div><!-- /.container-->
+			<a class="scroll-cue" href="#about" aria-label="Scroll down to the About section"><span></span></a>
 
 		</section><!--/.welcome-hero-->
-		<!--welcome-hero end -->
+
+		<!-- expertise marquee -->
+		<div class="marquee" role="region" aria-label="Areas of expertise">
+			<div class="marquee-track">
+				<ul class="marquee-list">
+					<li>ERP Implementation</li><li>Odoo</li><li>Requirement Gathering</li><li>Gap Analysis</li><li>Business Process Mapping</li><li>BRD &amp; Functional Specs</li><li>Workflow Configuration</li><li>UAT</li><li>User Training</li><li>Functional Testing</li>
+				</ul>
+				<ul class="marquee-list" aria-hidden="true">
+					<li>ERP Implementation</li><li>Odoo</li><li>Requirement Gathering</li><li>Gap Analysis</li><li>Business Process Mapping</li><li>BRD &amp; Functional Specs</li><li>Workflow Configuration</li><li>UAT</li><li>User Training</li><li>Functional Testing</li>
+				</ul>
+			</div>
+		</div>
+		
 
 		<!--about start -->
 		<section id="about" class="about">
@@ -183,29 +214,25 @@
 								</h3>
 								<p>
 								I currently work as an ERP Business Analyst at Nexus Incorporation Pvt. Ltd. My work covers requirement gathering, business process mapping and gap analysis, and I prepare BRDs, functional specifications, test cases, process flows and user documentation. I coordinate with developers and stakeholders on customizations, enhancements and issue resolution, and I support functional testing, UAT and post-implementation activities.
-
-Before that, I worked as a Functional Consultant at Innovax Solutions, where I started as an intern in October 2024. There I coordinated Odoo ERP implementation projects and configured and validated modules including CRM, Sales, Purchase, Inventory, HR, Payroll and Project Management, and supported UAT, user training and go-live.
-
-I recently completed my Bachelor in Information Management at St. Xavier's College, Kathmandu. My background also includes a Quality Assurance diploma and project management internships, and I enjoy working between business and technical teams while supporting the end users who rely on the system.
 								</p>
-								<div class="row">
-									<div class="col-sm-4">
-										<!-- <div class="single-about-add-info">
-											<h3>phone</h3>
-											<p><a href="tel:+9779860934210">+977-9860934210</a></p>
-										</div> -->
+								<p>
+								Before that, I worked as a Functional Consultant at Innovax Solutions, where I started as an intern in October 2024. There I coordinated Odoo ERP implementation projects, configured and validated modules including CRM, Sales, Purchase, Inventory, HR, Payroll and Project Management, and supported UAT, user training and go-live.
+								</p>
+								<p>
+								I recently completed my Bachelor in Information Management at St. Xavier's College, Kathmandu. My background also includes a Quality Assurance diploma and project management internships, and I enjoy working between business and technical teams while supporting the end users who rely on the system.
+								</p>
+								<div class="about-info">
+									<div class="single-about-add-info">
+										<h3>email</h3>
+										<p><a href="mailto:stharooza3@gmail.com">stharooza3@gmail.com</a></p>
 									</div>
-									<div class="col-sm-4">
-										<div class="single-about-add-info">
-											<h3>email</h3>
-											<p><a href="mailto:stharooza3@gmail.com">stharooza3@gmail.com</a></p>
-										</div>
+									<div class="single-about-add-info">
+										<h3>location</h3>
+										<p>Kalanki, Kathmandu, Nepal</p>
 									</div>
-									<div class="col-sm-4">
-										<div class="single-about-add-info">
-											<h3>website</h3>
-											<p><a href="https://rojashrestha.com.np" target="_blank">www.rojashrestha.com.np</a></p>
-										</div>
+									<div class="single-about-add-info">
+										<h3>website</h3>
+										<p><a href="https://rojashrestha.com.np" target="_blank" rel="noopener">www.rojashrestha.com.np</a></p>
 									</div>
 								</div>
 							</div>
@@ -238,6 +265,12 @@ I recently completed my Bachelor in Information Management at St. Xavier's Colle
 							</div>
 
 						</div>
+					</div>
+					<div class="about-stats" data-reveal>
+						<div class="stat"><span class="stat-num" data-since="2024-10">2</span><span class="stat-plus">+</span><span class="stat-label">Years in ERP</span></div>
+						<div class="stat"><span class="stat-num" data-count="7">7</span><span class="stat-label">Odoo modules configured</span></div>
+						<div class="stat"><span class="stat-num" data-count="3">3</span><span class="stat-label">Projects built</span></div>
+						<div class="stat"><span class="stat-num" data-count-certs>20</span><span class="stat-label">Certificates &amp; credentials</span></div>
 					</div>
 				</div>
 			</div>
@@ -299,7 +332,7 @@ I recently completed my Bachelor in Information Management at St. Xavier's Colle
 							<div class="single-horizontal-timeline" data-reveal>
 								<div class="experience-time">
 									<h2>Passing Year - 2017</h2>
-									<h3>Secondary Education Examination<span>SEE </span> </h3>
+									<h3>Secondary Education Examination <span>(SEE)</span></h3>
 								</div><!--/.experience-time-->
 								<div class="timeline-horizontal-border">
 									<i class="fa fa-circle" aria-hidden="true"></i>
@@ -337,8 +370,8 @@ I recently completed my Bachelor in Information Management at St. Xavier's Colle
 						<div class="skill-groups">
 						<div class="row">
 							<div class="col-md-4 col-sm-6">
-								<div class="skill-group" data-reveal>
-									<h3>ERP &amp; Business Analysis</h3>
+								<div class="skill-group tilt-card" data-reveal>
+									<h3><i class="fa fa-sitemap" aria-hidden="true"></i>ERP &amp; Business Analysis</h3>
 									<ul class="skill-chips">
 											<li>ERP Business Analysis</li>
 											<li>Odoo Functional Consulting</li>
@@ -351,8 +384,8 @@ I recently completed my Bachelor in Information Management at St. Xavier's Colle
 								</div>
 							</div>
 							<div class="col-md-4 col-sm-6">
-								<div class="skill-group" data-reveal>
-									<h3>Odoo Modules</h3>
+								<div class="skill-group tilt-card" data-reveal>
+									<h3><i class="fa fa-cubes" aria-hidden="true"></i>Odoo Modules</h3>
 									<ul class="skill-chips">
 											<li>CRM</li>
 											<li>Sales</li>
@@ -365,8 +398,8 @@ I recently completed my Bachelor in Information Management at St. Xavier's Colle
 								</div>
 							</div>
 							<div class="col-md-4 col-sm-6">
-								<div class="skill-group" data-reveal>
-									<h3>Documentation</h3>
+								<div class="skill-group tilt-card" data-reveal>
+									<h3><i class="fa fa-file-text-o" aria-hidden="true"></i>Documentation</h3>
 									<ul class="skill-chips">
 											<li>BRD</li>
 											<li>Functional Specifications</li>
@@ -378,8 +411,8 @@ I recently completed my Bachelor in Information Management at St. Xavier's Colle
 								</div>
 							</div>
 							<div class="col-md-4 col-sm-6">
-								<div class="skill-group" data-reveal>
-									<h3>Testing &amp; Delivery</h3>
+								<div class="skill-group tilt-card" data-reveal>
+									<h3><i class="fa fa-check-square-o" aria-hidden="true"></i>Testing &amp; Delivery</h3>
 									<ul class="skill-chips">
 											<li>Functional Testing</li>
 											<li>UAT Coordination</li>
@@ -391,8 +424,8 @@ I recently completed my Bachelor in Information Management at St. Xavier's Colle
 								</div>
 							</div>
 							<div class="col-md-4 col-sm-6">
-								<div class="skill-group" data-reveal>
-									<h3>Tools &amp; Technology</h3>
+								<div class="skill-group tilt-card" data-reveal>
+									<h3><i class="fa fa-wrench" aria-hidden="true"></i>Tools &amp; Technology</h3>
 									<ul class="skill-chips">
 											<li>MySQL</li>
 											<li>MongoDB</li>
@@ -405,8 +438,8 @@ I recently completed my Bachelor in Information Management at St. Xavier's Colle
 								</div>
 							</div>
 							<div class="col-md-4 col-sm-6">
-								<div class="skill-group" data-reveal>
-									<h3>Professional Strengths</h3>
+								<div class="skill-group tilt-card" data-reveal>
+									<h3><i class="fa fa-users" aria-hidden="true"></i>Professional Strengths</h3>
 									<ul class="skill-chips">
 											<li>Stakeholder Communication</li>
 											<li>Project Coordination</li>
@@ -435,117 +468,77 @@ I recently completed my Bachelor in Information Management at St. Xavier's Colle
 				</div>
 				<div class="container">
 					<div class="experience-content">
-						<div class="main-timeline">
-							<ul>
-								<li>
-									<div class="single-timeline-box fix" data-reveal>
-										<div class="row">
-											<div class="col-md-5">
-												<div class="experience-time text-right">
-													<h2>Jun 2026 - Present</h2>
-													<h3>ERP Business Analyst</h3>
-												</div><!--/.experience-time-->
-											</div><!--/.col-->
-											<div class="col-md-offset-1 col-md-5">
-												<div class="timeline">
-													<div class="timeline-content">
-														<h4 class="title">
-															<span><i class="fa fa-circle" aria-hidden="true"></i></span>
-															<span style="color:#0060c7;">Nexus Incorporation Pvt. Ltd.</span>
-														</h4>
-														<h5>ERP implementation &amp; business analysis</h5>
-														<p class="description">
-															Analyze business requirements and translate them into practical ERP workflows and functional solutions. Run requirement gathering, gap analysis and workflow mapping; prepare BRDs, functional specifications, test cases, process flows and user documentation; and coordinate with developers and stakeholders on customizations, enhancements and issue resolution, alongside functional testing, UAT and post-implementation support.
-														</p>
-													</div><!--/.timeline-content-->
-												</div><!--/.timeline-->
-											</div><!--/.col-->
-										</div>
-									</div><!--/.single-timeline-box-->
-								</li>
-		
-								<li>
-									<div class="single-timeline-box fix" data-reveal>
-										<div class="row">
-											<div class="col-md-offset-1 col-md-5 experience-time-responsive">
-												<div class="experience-time">
-													<h2>Jan 2025 - Jun 2026</h2>
-													<h3>Functional Consultant</h3>
-												</div><!--/.experience-time-->
-											</div><!--/.col-->
-											<div class="col-md-5">
-												<div class="timeline">
-													<div class="timeline-content text-right">
-														<h4 class="title">
-															<span><i class="fa fa-circle" aria-hidden="true"></i></span>
-															<span style="color:#0060c7;">Innovax Solutions Pvt. Ltd.</span>
-														</h4>
-														<h5>Odoo ERP implementation</h5>
-														<p class="description">
-															Coordinated Odoo ERP implementation projects, requirements, timelines and client deliverables. Configured and validated Odoo modules including CRM, Sales, Purchase, Inventory, HR, Payroll and Project Management, coordinated with developers on customizations, integrations and testing, and supported UAT, user training, go-live and post-implementation assistance.
-														</p>
-													</div><!--/.timeline-content-->
-												</div><!--/.timeline-->
-											</div><!--/.col-->
-										</div>
-									</div><!--/.single-timeline-box-->
-								</li>
-		
-								<li>
-									<div class="single-timeline-box fix" data-reveal>
-										<div class="row">
-											<div class="col-md-5">
-												<div class="experience-time text-right">
-													<h2>Oct 2024 - Jan 2025</h2>
-													<h3>Functional Consultant Intern</h3>
-												</div><!--/.experience-time-->
-											</div><!--/.col-->
-											<div class="col-md-offset-1 col-md-5">
-												<div class="timeline">
-													<div class="timeline-content">
-														<h4 class="title">
-															<span><i class="fa fa-circle" aria-hidden="true"></i></span>
-															<span style="color:#0060c7;">Innovax Solutions Pvt. Ltd.</span>
-														</h4>
-														<h5>Odoo functional support</h5>
-														<p class="description">
-															Assisted in Odoo implementation, functional testing, requirement analysis and documentation, and supported user manuals, implementation notes, defect tracking, client demonstrations and training.
-														</p>
-													</div><!--/.timeline-content-->
-												</div><!--/.timeline-->
-											</div><!--/.col-->
-										</div>
-									</div><!--/.single-timeline-box-->
-								</li>
-		
-								<li>
-									<div class="single-timeline-box fix" data-reveal>
-										<div class="row">
-											<div class="col-md-offset-1 col-md-5 experience-time-responsive">
-												<div class="experience-time">
-													<h2>2024 - 2025</h2>
-													<h3>Project Manager Associate Intern</h3>
-												</div><!--/.experience-time-->
-											</div><!--/.col-->
-											<div class="col-md-5">
-												<div class="timeline">
-													<div class="timeline-content text-right">
-														<h4 class="title">
-															<span><i class="fa fa-circle" aria-hidden="true"></i></span>
-															<span style="color:#0060c7;">Voyager IT Company</span>
-														</h4>
-														<h5>Project management</h5>
-														<p class="description">
-															Worked as a project manager associate intern at Voyager IT Company.
-														</p>
-													</div><!--/.timeline-content-->
-												</div><!--/.timeline-->
-											</div><!--/.col-->
-										</div>
-									</div><!--/.single-timeline-box-->
-								</li>
-							</ul>
-						</div><!--.main-timeline-->
+						<div class="xp-timeline">
+							<span class="xp-line-fill" aria-hidden="true"></span>
+							<ol class="xp-list">
+							<li class="xp-item" data-reveal>
+								<div class="xp-when"><span class="xp-date">Jun 2026 &ndash; Present</span><span class="xp-state">Current</span></div>
+								<span class="xp-dot" aria-hidden="true"></span>
+								<article class="xp-card">
+									<h3>ERP Business Analyst</h3>
+									<h4>Nexus Incorporation Pvt. Ltd.</h4>
+									<ul class="xp-points">
+											<li>Analyze business requirements and translate them into practical ERP workflows and functional solutions.</li>
+											<li>Conduct requirement gathering, process analysis, gap analysis and workflow mapping.</li>
+											<li>Prepare BRDs, functional specifications, test cases, process flows and user documentation.</li>
+											<li>Configure and validate ERP processes based on business requirements and standard functionality.</li>
+											<li>Coordinate with developers and stakeholders on customizations, enhancements and issue resolution.</li>
+											<li>Perform functional testing and UAT while supporting implementation and post-implementation activities.</li>
+									</ul>
+								</article>
+							</li>
+							<li class="xp-item" data-reveal>
+								<div class="xp-when"><span class="xp-date">Jan 2025 &ndash; Jun 2026</span></div>
+								<span class="xp-dot" aria-hidden="true"></span>
+								<article class="xp-card">
+									<h3>Functional Consultant</h3>
+									<h4>Innovax Solutions Pvt. Ltd.</h4>
+									<ul class="xp-points">
+											<li>Coordinated Odoo ERP implementation projects, requirements, timelines and client deliverables.</li>
+											<li>Conducted requirement gathering, gap analysis and workflow design across business functions.</li>
+											<li>Prepared BRDs, functional specifications, process flows, user manuals and implementation documentation.</li>
+											<li>Configured and validated Odoo modules including CRM, Sales, Purchase, Inventory, HR, Payroll and Project Management.</li>
+											<li>Coordinated with developers on customizations, enhancements, integrations, testing and issue resolution.</li>
+											<li>Supported UAT, user training, go-live activities and post-implementation assistance.</li>
+									</ul>
+								</article>
+							</li>
+							<li class="xp-item" data-reveal>
+								<div class="xp-when"><span class="xp-date">Oct 2024 &ndash; Jan 2025</span></div>
+								<span class="xp-dot" aria-hidden="true"></span>
+								<article class="xp-card">
+									<h3>Functional Consultant Intern</h3>
+									<h4>Innovax Solutions Pvt. Ltd.</h4>
+									<ul class="xp-points">
+											<li>Assisted in Odoo implementation, functional testing, requirement analysis and documentation.</li>
+											<li>Supported user manuals, implementation notes, defect tracking, client demonstrations and training.</li>
+									</ul>
+								</article>
+							</li>
+							<li class="xp-item" data-reveal>
+								<div class="xp-when"><span class="xp-date">2024 &ndash; 2025</span></div>
+								<span class="xp-dot" aria-hidden="true"></span>
+								<article class="xp-card">
+									<h3>Project Manager Associate Intern</h3>
+									<h4>Voyager IT Company</h4>
+									<ul class="xp-points">
+											<li>Worked as a project manager associate intern at Voyager IT Company.</li>
+									</ul>
+								</article>
+							</li>
+							<li class="xp-item" data-reveal>
+								<div class="xp-when"><span class="xp-date">Completed Mar 2025</span></div>
+								<span class="xp-dot" aria-hidden="true"></span>
+								<article class="xp-card">
+									<h3>Project Management Associate Intern (Virtual)</h3>
+									<h4>Excelerate &times; Saint Louis University</h4>
+									<ul class="xp-points">
+											<li>Completed the Project Management Associate internship powered by Excelerate, in partnership with Saint Louis University.</li>
+									</ul>
+								</article>
+							</li>
+							</ol>
+						</div><!--/.xp-timeline-->
 					</div><!--.experience-content-->
 				</div>
 			</div>
@@ -560,24 +553,27 @@ I recently completed my Bachelor in Information Management at St. Xavier's Colle
 				<div class="projects-content">
 					<div class="row">
 						<div class="col-md-4 col-sm-6">
-								<article class="project-card" data-reveal>
+								<article class="project-card tilt-card" data-reveal>
 									<h3>EduSanchal</h3>
 									<span class="project-type">School Management System</span>
 									<p>Developed role-based workflows for Admin, Teacher and Student users, including attendance and scheduling.</p>
+									<ul class="pc-tags"><li>Role-based access</li><li>Attendance</li><li>Scheduling</li></ul>
 								</article>
 							</div>
 							<div class="col-md-4 col-sm-6">
-								<article class="project-card" data-reveal>
+								<article class="project-card tilt-card" data-reveal>
 									<h3>Doctor Appointment System</h3>
 									<span class="project-type">Healthcare booking</span>
 									<p>Built secure workflows with authentication and structured data handling.</p>
+									<ul class="pc-tags"><li>Authentication</li><li>Secure workflows</li><li>Structured data</li></ul>
 								</article>
 							</div>
 							<div class="col-md-4 col-sm-6">
-								<article class="project-card" data-reveal>
+								<article class="project-card tilt-card" data-reveal>
 									<h3>SwadExpress</h3>
 									<span class="project-type">Food Delivery System</span>
 									<p>Developed order management workflows and database-driven operations.</p>
+									<ul class="pc-tags"><li>Order management</li><li>Database-driven</li></ul>
 								</article>
 							</div>
 					</div><!--/.row-->
@@ -597,79 +593,93 @@ I recently completed my Bachelor in Information Management at St. Xavier's Colle
 				</div>
 				<div class="container">
 					<div class="portfolio-content">
-						<div class="isotope">
-							<div class="row">
-
-								<div class="col-sm-4">
-									<div class="item" data-reveal="scale">
-										<img src="assets/images/portfolio/p1.jpg" alt="API Testing with Postman certificate"/>
-										<div class="isotope-overlay">
-											<a href="https://testautomationu.applitools.com/certificate/?id=7944dda8" target="_blank">
-												API Testing with POSTMAN
-											</a>
-										</div><!-- /.isotope-overlay -->
-									</div><!-- /.item -->
-									<div class="item" data-reveal="scale">
-										<img src="assets/images/portfolio/p2.jpg" alt="Full Stack Development certificate"/>
-										<div class="isotope-overlay">
-											<a href="assets/images/portfolio/p2.jpg" target="_blank" rel="noopener">
-												Full Stack Development
-											</a>
-										</div><!-- /.isotope-overlay -->
-									</div><!-- /.item -->
-								</div><!-- /.col -->
-
-								<div class="col-sm-4">
-									<div class="item" data-reveal="scale">
-										<img src="assets/images/portfolio/p3.jpg" alt="Aspire Leaders Program certificate"/>
-										<div class="isotope-overlay">
-											<a href="assets/images/portfolio/p3.jpg" target="_blank" rel="noopener">
-												Aspire Leaders Program
-											</a>
-										</div><!-- /.isotope-overlay -->
-									</div><!-- /.item -->
-								</div><!-- /.col -->
-
-								<div class="col-sm-4">
-									<div class="item" data-reveal="scale">
-										<img src="assets/images/portfolio/p4.jpg" alt="Selenium WebDriver certificate"/>
-										<div class="isotope-overlay">
-											<a href="https://testautomationu.applitools.com/certificate/?id=99bb2624" target="_blank">
-												Selenium WebDriver
-											</a>
-										</div><!-- /.isotope-overlay -->
-									</div><!-- /.item -->
-									<div class="item" data-reveal="scale">
-										<img src="assets/images/portfolio/p5.jpg" alt="Software Testing certificate"/>
-										<div class="isotope-overlay">
-											<a href="https://olympus.mygreatlearning.com/courses/43771/certificate" target="_blank">
-												Software Testing
-											</a>
-										</div><!-- /.isotope-overlay -->
-									</div><!-- /.item -->
-									
-								</div><!-- /.col -->
-							</div><!-- /.row -->
-						</div><!--/.isotope-->
-					<div class="more-certs" data-reveal>
-						<h3>More credentials</h3>
-						<ul>
-							<li>Odoo 18 Functional Certification</li>
-							<li>Quality Assurance Diploma &ndash; Vrit Technology</li>
-							<li>Project Management Intern Completion Certificate &ndash; Excelerate</li>
+						<div class="cert-filters" role="group" aria-label="Filter certificates">
+							<button type="button" class="cert-filter" data-filter="all" aria-pressed="true">All<span class="cf-count"></span></button>
+							<button type="button" class="cert-filter" data-filter="erp" aria-pressed="false">ERP &amp; Project Management<span class="cf-count"></span></button>
+							<button type="button" class="cert-filter" data-filter="qa" aria-pressed="false">QA &amp; Testing<span class="cf-count"></span></button>
+							<button type="button" class="cert-filter" data-filter="dev" aria-pressed="false">Development &amp; Leadership<span class="cf-count"></span></button>
+						</div>
+						<p class="sr-only" id="certStatus" role="status" aria-live="polite"></p>
+						<ul class="cert-grid">
+							<li class="cert-card" data-cat="erp" data-reveal>
+								<span class="cert-feat">In my CV</span><span class="cert-year">2026</span><button type="button" class="cert-open" data-full="assets/images/portfolio/odoo-18-functional.jpg" data-title="Odoo 18 Functional Certification" data-issuer="Odoo HK Limited" data-year="2026" data-link="" aria-haspopup="dialog">
+									<span class="cert-thumb"><img src="assets/images/portfolio/odoo-18-functional.jpg" alt="Odoo 18 Functional Certification certificate" loading="lazy"></span>
+									<span class="cert-body"><span class="cert-title">Odoo 18 Functional Certification</span><span class="cert-issuer">Odoo HK Limited</span></span>
+								</button>
+							</li>
+							<li class="cert-card" data-cat="erp" data-reveal>
+								<span class="cert-feat">In my CV</span><span class="cert-year">2025</span><button type="button" class="cert-open" data-full="assets/images/portfolio/excelerate-pm-associate.jpg" data-title="Project Management Associate Internship" data-issuer="Excelerate &times; Saint Louis University" data-year="2025" data-link="" aria-haspopup="dialog">
+									<span class="cert-thumb"><img src="assets/images/portfolio/excelerate-pm-associate.jpg" alt="Project Management Associate Internship certificate" loading="lazy"></span>
+									<span class="cert-body"><span class="cert-title">Project Management Associate Internship</span><span class="cert-issuer">Excelerate &times; Saint Louis University</span></span>
+								</button>
+							</li>
+							<li class="cert-card" data-cat="qa" data-reveal>
+								<span class="cert-feat">In my CV</span><button type="button" class="cert-open" data-full="assets/images/portfolio/qa-diploma.jpg" data-title="Quality Assurance Diploma" data-issuer="Skill Shikshya &middot; Vrit Technology &middot; 150 hours" data-year="" data-link="" aria-haspopup="dialog">
+									<span class="cert-thumb"><img src="assets/images/portfolio/qa-diploma.jpg" alt="Quality Assurance Diploma certificate" loading="lazy"></span>
+									<span class="cert-body"><span class="cert-title">Quality Assurance Diploma</span><span class="cert-issuer">Skill Shikshya &middot; Vrit Technology &middot; 150 hours</span></span>
+								</button>
+							</li>
+							<li class="cert-card" data-cat="qa" data-reveal>
+								<button type="button" class="cert-open" data-full="assets/images/portfolio/p1.jpg" data-title="API Testing with Postman" data-issuer="Test Automation University" data-year="" data-link="https://testautomationu.applitools.com/certificate/?id=7944dda8" aria-haspopup="dialog">
+									<span class="cert-thumb"><img src="assets/images/portfolio/p1.jpg" alt="API Testing with Postman certificate" loading="lazy"></span>
+									<span class="cert-body"><span class="cert-title">API Testing with Postman</span><span class="cert-issuer">Test Automation University</span></span>
+								</button>
+							</li>
+							<li class="cert-card" data-cat="qa" data-reveal>
+								<span class="cert-year">2024</span><button type="button" class="cert-open" data-full="assets/images/portfolio/tau-continuous-testing.jpg" data-title="The Whole Team Approach to Continuous Testing" data-issuer="Test Automation University" data-year="2024" data-link="https://testautomationu.applitools.com/certificate/?id=160c8c48" aria-haspopup="dialog">
+									<span class="cert-thumb"><img src="assets/images/portfolio/tau-continuous-testing.jpg" alt="The Whole Team Approach to Continuous Testing certificate" loading="lazy"></span>
+									<span class="cert-body"><span class="cert-title">The Whole Team Approach to Continuous Testing</span><span class="cert-issuer">Test Automation University</span></span>
+								</button>
+							</li>
+							<li class="cert-card" data-cat="qa" data-reveal>
+								<span class="cert-year">2024</span><button type="button" class="cert-open" data-full="assets/images/portfolio/tau-test-automation-foundation.jpg" data-title="Setting a Foundation for Successful Test Automation" data-issuer="Test Automation University" data-year="2024" data-link="https://testautomationu.applitools.com/certificate/?id=efa2980a" aria-haspopup="dialog">
+									<span class="cert-thumb"><img src="assets/images/portfolio/tau-test-automation-foundation.jpg" alt="Setting a Foundation for Successful Test Automation certificate" loading="lazy"></span>
+									<span class="cert-body"><span class="cert-title">Setting a Foundation for Successful Test Automation</span><span class="cert-issuer">Test Automation University</span></span>
+								</button>
+							</li>
+							<li class="cert-card" data-cat="qa" data-reveal>
+								<button type="button" class="cert-open" data-full="assets/images/portfolio/p4.jpg" data-title="Codeless Test Automation with Selenium IDE" data-issuer="Test Automation University" data-year="" data-link="" aria-haspopup="dialog">
+									<span class="cert-thumb"><img src="assets/images/portfolio/p4.jpg" alt="Codeless Test Automation with Selenium IDE certificate" loading="lazy"></span>
+									<span class="cert-body"><span class="cert-title">Codeless Test Automation with Selenium IDE</span><span class="cert-issuer">Test Automation University</span></span>
+								</button>
+							</li>
+							<li class="cert-card" data-cat="qa" data-reveal>
+								<button type="button" class="cert-open" data-full="assets/images/portfolio/p5.jpg" data-title="Software Testing Tutorial" data-issuer="Great Learning Academy" data-year="" data-link="https://olympus.mygreatlearning.com/courses/43771/certificate" aria-haspopup="dialog">
+									<span class="cert-thumb"><img src="assets/images/portfolio/p5.jpg" alt="Software Testing Tutorial certificate" loading="lazy"></span>
+									<span class="cert-body"><span class="cert-title">Software Testing Tutorial</span><span class="cert-issuer">Great Learning Academy</span></span>
+								</button>
+							</li>
+							<li class="cert-card" data-cat="dev" data-reveal>
+								<button type="button" class="cert-open" data-full="assets/images/portfolio/p2.jpg" data-title="Full Stack Software Developer" data-issuer="Itronix Solutions" data-year="" data-link="" aria-haspopup="dialog">
+									<span class="cert-thumb"><img src="assets/images/portfolio/p2.jpg" alt="Full Stack Software Developer certificate" loading="lazy"></span>
+									<span class="cert-body"><span class="cert-title">Full Stack Software Developer</span><span class="cert-issuer">Itronix Solutions</span></span>
+								</button>
+							</li>
+							<li class="cert-card" data-cat="dev" data-reveal>
+								<span class="cert-year">2024</span><button type="button" class="cert-open" data-full="assets/images/portfolio/p3-web.jpg" data-title="Aspire Leaders Program" data-issuer="Aspire Institute" data-year="2024" data-link="" aria-haspopup="dialog">
+									<span class="cert-thumb"><img src="assets/images/portfolio/p3-web.jpg" alt="Aspire Leaders Program certificate" loading="lazy"></span>
+									<span class="cert-body"><span class="cert-title">Aspire Leaders Program</span><span class="cert-issuer">Aspire Institute</span></span>
+								</button>
+							</li>
+						</ul>
+						<div class="more-certs" data-reveal>
+							<h3>More credentials</h3>
+							<ul>
+							<li><a href="https://testautomationu.applitools.com/certificate/?id=99bb2624" target="_blank" rel="noopener">Selenium WebDriver &ndash; Test Automation University</a></li>
 							<li><a href="https://testautomationu.applitools.com/certificate/?id=82395cf6" target="_blank" rel="noopener">Cypress &ndash; Test Automation University</a></li>
-							<li><a href="https://testautomationu.applitools.com/certificate/?id=160c8c48" target="_blank" rel="noopener">Continuous Testing &ndash; Test Automation University</a></li>
-							<li><a href="https://testautomationu.applitools.com/certificate/?id=efa2980a" target="_blank" rel="noopener">Test Automation &ndash; Test Automation University</a></li>
 							<li>JavaScript &ndash; Codeliber</li>
 							<li>Project Charter with Google Docs &ndash; Coursera</li>
 							<li>ClickUp &ndash; Coursera</li>
 							<li>Human Resource Management &ndash; Great Learning</li>
-						</ul>
-					</div><!--/.more-certs-->
-					</div><!--/.gallery-content-->
+							<li>Project Management Training &ndash; Skill Lab</li>
+							<li>Human Resource Training &ndash; Skill Lab</li>
+							<li>Content Writing Training &ndash; Skill Lab</li>
+							<li>Quantum Computing &ndash; St. Xavier&rsquo;s Physics Council Nepal</li>
+							</ul>
+						</div><!--/.more-certs-->
+					</div><!--/.portfolio-content-->
 				</div><!--/.container-->
 			</div><!--/.portfolio-details-->
-
 		</section><!--/.portfolio-->
 		<!--portfolio end -->
 		
@@ -817,16 +827,19 @@ I recently completed my Bachelor in Information Management at St. Xavier's Colle
 						<div class="col-md-offset-1 col-md-5 col-sm-6">
 							<div class="single-contact-box" data-reveal="left">
 								<div class="contact-form">
-										<form id="myForm" action="https://formspree.io/f/xkndyvqg" method="post" name="form">
-
+										<form id="myForm" action="https://formspree.io/f/YOUR_FORM_ID" method="post" name="form" novalidate>
+										<div class="hp-field" aria-hidden="true"><label>Leave this field empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
+										<input type="hidden" name="_subject" value="New message from rojashrestha.com.np">
 										<div class="row">
 											<div class="col-sm-6 col-xs-12">
 												<div class="form-group">
-												  <input type="text" class="form-control" id="name" placeholder="Name*" name="name" autocomplete="name" required>
+													<label class="sr-only" for="name">Your name</label>
+													<input type="text" class="form-control" id="name" placeholder="Name*" name="name" autocomplete="name" required>
 												</div><!--/.form-group-->
 											</div><!--/.col-->
 											<div class="col-sm-6 col-xs-12">
 												<div class="form-group">
+													<label class="sr-only" for="email">Your email</label>
 													<input type="email" class="form-control" id="email" placeholder="Email*" name="email" autocomplete="email" required>
 												</div><!--/.form-group-->
 											</div><!--/.col-->
@@ -834,6 +847,7 @@ I recently completed my Bachelor in Information Management at St. Xavier's Colle
 										<div class="row">
 											<div class="col-sm-12">
 												<div class="form-group">
+													<label class="sr-only" for="subject">Subject</label>
 													<input type="text" class="form-control" id="subject" placeholder="Subject" name="subject" autocomplete="off">
 												</div><!--/.form-group-->
 											</div><!--/.col-->
@@ -841,22 +855,21 @@ I recently completed my Bachelor in Information Management at St. Xavier's Colle
 										<div class="row">
 											<div class="col-sm-12">
 												<div class="form-group">
-													<textarea class="form-control" rows="8" id="comment" placeholder="Message" name="message" autocomplete="off"></textarea>
+													<label class="sr-only" for="comment">Your message</label>
+													<textarea class="form-control" rows="8" id="comment" placeholder="Message*" name="message" autocomplete="off" required></textarea>
 												</div><!--/.form-group-->
 											</div><!--/.col-->
 										</div><!--/.row-->
 										<div class="row">
 											<div class="col-sm-12">
 												<div class="single-contact-btn">
-													<input type="submit" class="contact-btn" onclick="return submitForm();" value="Submit" name="submit">
+													<input type="submit" class="contact-btn" value="Send message" name="submit">
 												</div><!--/.single-single-contact-btn-->
 											</div><!--/.col-->
 										</div><!--/.row-->
+										<div class="form-status" id="formStatus" role="status" aria-live="polite" hidden></div>
 									</form><!--/form-->
 								</div><!--/.contact-form-->
-								<div id="successMessage" style="display: none;">
-									Thank you. Your form has been submitted!
-							</div>
 							</div><!--/.single-contact-box-->
 						</div><!--/.col-->
 						<div class="col-md-offset-1 col-md-5 col-sm-6">
@@ -868,10 +881,6 @@ I recently completed my Bachelor in Information Management at St. Xavier's Colle
 										<p>ERP Business Analyst &middot; Odoo Functional Consultant</p>
 									</div>
 									<div class="contact-add-info">
-										<!-- <div class="single-contact-add-info">
-											<h3>phone</h3>
-											<p><a href="tel:+9779860934210">+977-9860934210</a></p>
-										</div> -->
 										<div class="single-contact-add-info">
 											<h3>email</h3>
 											<p><a href="mailto:stharooza3@gmail.com">stharooza3@gmail.com</a></p>
@@ -945,40 +954,26 @@ I recently completed my Bachelor in Information Management at St. Xavier's Colle
         </footer><!--/.footer-copyright-->
 		<!--footer-copyright end-->
 		
+		<!-- Certificate viewer -->
+		<dialog id="certDialog" class="cert-dialog" aria-labelledby="certDialogTitle">
+			<div class="cd-panel">
+				<button type="button" class="cd-btn cd-close" aria-label="Close certificate viewer">&times;</button>
+				<button type="button" class="cd-btn cd-prev" aria-label="Previous certificate">&lsaquo;</button>
+				<button type="button" class="cd-btn cd-next" aria-label="Next certificate">&rsaquo;</button>
+				<div class="cd-stage"><img src="" alt=""></div>
+				<div class="cd-info">
+					<div>
+						<h3 id="certDialogTitle"></h3>
+						<p class="cd-meta"></p>
+					</div>
+					<span class="cd-count" aria-hidden="true"></span>
+					<a class="cd-verify" href="#" target="_blank" rel="noopener" hidden>Verify credential</a>
+				</div>
+			</div>
+		</dialog>
+
 		<!-- Include all js compiled plugins (below), or include individual files as needed -->
 <script>
-    function submitForm(event) {
-        if (event) {
-           // event.preventDefault(); // Prevent default form submission
-            var form = event.target; // Get the form element
-        } else {
-            return; // If event is undefined, exit function
-        }
-
-        var isValid = form.checkValidity(); // Check if the form is valid
-
-        if (isValid) {
-            // Display success message
-            document.getElementById("successMessage").style.display = "block";
-
-            // Reset the form
-            //form.reset();
-			//setTimeout(function(){
-			//location.reload();
-			//}, 5000);
-			
-			
-        } else {
-            // If form is not valid, trigger HTML5 form validation
-            form.reportValidity();
-        }
-    }
-
-    document.addEventListener("DOMContentLoaded", function() {
-        var form = document.getElementById('myForm');
-        form.addEventListener("submit", submitForm);
-    });
-	
 		var randomContent = [
 		"Quality is never an accident; it is always the result of intelligent effort. - John Ruskin",
     "In the world of Internet Customer Service, it’s important to remember your competitor is only one mouse click away. - Doug Warner",
@@ -1073,7 +1068,10 @@ I recently completed my Bachelor in Information Management at St. Xavier's Colle
 		<!-- GSAP + ScrollTrigger, then the motion layer (Step 2) -->
 		<script data-cfasync="false" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 		<script data-cfasync="false" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+		<script data-cfasync="false" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
 		<script data-cfasync="false" src="assets/js/motion.js"></script>
+		<script data-cfasync="false" src="assets/js/certs.js"></script>
+		<script data-cfasync="false" src="assets/js/contact.js"></script>
 		
 		<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-MQW7DFR2LT"></script>
