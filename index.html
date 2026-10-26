@@ -16,28 +16,34 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<!-- Motion flag (Step 2): hides [data-reveal] items until motion.js animates them.
+		     Not set for reduced-motion users; removed again if the animation script never starts. -->
+		<script data-cfasync="false">
+		(function (d) {
+			var r = d.documentElement;
+			if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+			r.classList.add('motion-ready');
+			setTimeout(function () {
+				if (!window.__motionBooted) r.classList.remove('motion-ready');
+			}, 4000);
+		})(document);
+		</script>
 		
 		
-		<meta name="description" content="Roja Shrestha's online portfolio showcasing 1+ years of experience in Software QA industry, including skills in Software QA, QC, QA, JAVA, MySQL, Oracle, MSSQL, WordPress, Testing, and more.">
-		<meta name="keywords" content="Roja Shrestha, portfolio, computer industry, technical skills, communication skills, goal-focused professional, SOftware QA, QC, QA, JAVA,  MySQL, Oracle, MSSQL, WordPress, Linux, Windows, Testing, Selenium web driver, TestNG, agile methodology">
+		<meta name="description" content="Roja Shrestha is an ERP Business Analyst and Odoo Functional Consultant in Kathmandu, Nepal, with hands-on experience in ERP implementation, requirement gathering, gap analysis, functional documentation, UAT and user training.">
+		<meta name="keywords" content="Roja Shrestha, ERP Business Analyst, Odoo Functional Consultant, Odoo, ERP implementation, requirement gathering, gap analysis, business process mapping, BRD, UAT, Kathmandu, Nepal">
 		<meta name="author" content="Roja Shrestha">
         <!-- Roja Shrestha Geniune information and meta tags -->
 
 		<!-- Open Graph Meta Tags -->
-		<meta property="og:title" content="Roja Shrestha | Founder | Software QA | Software Quality Assurance Engineer | Tester | Online Research Geek | Online Portfolio">
-		<meta property="og:description" content="Roja Shrestha's online portfolio showcasing 1+ years of experience in Software QA industry, including skills in Software QA, QC, QA, JAVA, MySQL, Oracle, MSSQL, WordPress, Testing, and more.">
-		<meta property="og:image" content="https://lavthaiba.com.np/assets/images/about/lt-home.jpg"> <!-- Replace with the actual path to your preview image -->
+		<meta property="og:title" content="Roja Shrestha | ERP Business Analyst | Odoo Functional Consultant">
+		<meta property="og:description" content="ERP Business Analyst and Odoo Functional Consultant with hands-on experience in ERP implementation, requirement gathering, gap analysis, functional documentation, UAT and user training.">
+		<meta property="og:image" content="https://rojashrestha.com.np/assets/images/about/profile_image.jpeg">
 		<meta property="og:url" content="https://rojashrestha.com.np">
 		<meta property="og:type" content="website">
 
-		<!-- Twitter Card Meta Tags 
-		<meta name="twitter:card" content="summary_large_image">
-		<meta name="twitter:title" content="Roja Shrestha | Founder | Software QA | Software Quality Assurance Engineer | Tester | Online Research Geek | Online Portfolio">
-		<meta name="twitter:description" content="Roja Shrestha's online portfolio showcasing 1
-		1+ years of experience in Software QA industry, including skills in Software QA, QC, QA, JAVA, MySQL, Oracle, MSSQL, WordPress, Testing, and more.">
-		<meta name="twitter:image" content="https://lavthaiba.com.np/assets/images/about/home.jpg">  Replace with the actual path to your preview image 
-		<meta name="twitter:url" content="https://lavthaiba.com.np">
-		<meta name="twitter:site" content="@lavthaiba"> Your Twitter handle -->
+		
 										
 		
 		
@@ -45,7 +51,7 @@
 		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&amp;subset=devanagari,latin-ext" rel="stylesheet">
         
         <!-- title of site -->
-		<title>Roja Shrestha | QA Specialist | Project Manager | Software Tester | Tutor | Online Portfolio</title>
+		<title>Roja Shrestha | ERP Business Analyst | Odoo Functional Consultant | Portfolio</title>
 
         <!-- For favicon png -->
 		<link rel="shortcut icon" type="image/icon" href="assets/logo/favicon.png"/>
@@ -74,6 +80,11 @@
         
         <!--responsive.css-->
         <link rel="stylesheet" href="assets/css/responsive.css">
+
+        <!--motion.css (Step 1)-->
+        <link rel="stylesheet" href="assets/css/motion.css">
+        <!--content.css (sections reworked from the updated CV)-->
+        <link rel="stylesheet" href="assets/css/content.css">
         
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -86,6 +97,16 @@
     </head>
 	
 	<body>
+		<a class="skip-link" href="#about">Skip to content</a>
+
+		<!-- Page loader (visible only while motion is enabled) -->
+		<div class="page-loader" aria-hidden="true">
+			<div class="pl-inner">
+				<span class="pl-mark">R<b>S</b></span>
+				<span class="pl-bar"><i></i></span>
+			</div>
+		</div>
+		<div class="cursor-glow" aria-hidden="true"></div>
 	
 		<!-- Google Tag Manager (noscript) -->
 		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WFBPQ69S"
@@ -121,6 +142,7 @@
 			                    <li class=" smooth-menu"><a href="#education">education</a></li>
 			                    <li class="smooth-menu"><a href="#skills">skills</a></li>
 			                    <li class="smooth-menu"><a href="#experience">experience</a></li>
+								<li class="smooth-menu"><a href="#projects">projects</a></li>
 								<li class="smooth-menu"><a href="#portfolio">certifications</a></li>
 			                    <li class="smooth-menu"><a href="#profiles">profile</a></li>			                    
 			                    <li class="smooth-menu"><a href="#contact">contact</a></li>
@@ -138,68 +160,86 @@
 	
 		<!--welcome-hero start -->
 		<section id="welcome-hero" class="welcome-hero">
+			<canvas class="hero-canvas" aria-hidden="true"></canvas>
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12 text-center">
 						<div class="header-text">
-							<h2>hello <span>,</span> I am <br> ROJA <br> SHRESTHA <span>.</span>   </h2>
-							<p> Tech enthusiast</p>
-							<a href="#contact">Let's Talk</a>
+							<h2 class="hero-title" aria-label="Hello, I am Roja Shrestha">
+								<span class="ht-line" aria-hidden="true">hello <span class="ht-accent">,</span> I am</span>
+								<span class="ht-line" aria-hidden="true" data-split>ROJA</span>
+								<span class="ht-line" aria-hidden="true" data-split>SHRESTHA<span class="ht-accent">.</span></span>
+							</h2>
+							<p class="hero-role" data-reveal="hero">ERP Business Analyst &middot; Odoo Functional Consultant</p>
+							<p class="hero-focus" data-reveal="hero"><span class="hf-label">I work on</span> <span class="hf-window" data-rotate><span class="hf-word">Requirement gathering</span><span class="hf-word">Gap analysis</span><span class="hf-word">Odoo configuration</span><span class="hf-word">UAT &amp; user training</span><span class="hf-word">Functional documentation</span></span></p>
+							<div class="hero-actions" data-reveal="hero">
+								<a href="#contact">Let's Talk</a>
+								<a href="#projects" class="hero-btn-ghost">View Projects</a>
+							</div>
 						</div><!--/.header-text-->
 					</div><!--/.col-->
 				</div><!-- /.row-->
 			</div><!-- /.container-->
+			<a class="scroll-cue" href="#about" aria-label="Scroll down to the About section"><span></span></a>
 
 		</section><!--/.welcome-hero-->
-		<!--welcome-hero end -->
+
+		<!-- expertise marquee -->
+		<div class="marquee" role="region" aria-label="Areas of expertise">
+			<div class="marquee-track">
+				<ul class="marquee-list">
+					<li>ERP Implementation</li><li>Odoo</li><li>Requirement Gathering</li><li>Gap Analysis</li><li>Business Process Mapping</li><li>BRD &amp; Functional Specs</li><li>Workflow Configuration</li><li>UAT</li><li>User Training</li><li>Functional Testing</li>
+				</ul>
+				<ul class="marquee-list" aria-hidden="true">
+					<li>ERP Implementation</li><li>Odoo</li><li>Requirement Gathering</li><li>Gap Analysis</li><li>Business Process Mapping</li><li>BRD &amp; Functional Specs</li><li>Workflow Configuration</li><li>UAT</li><li>User Training</li><li>Functional Testing</li>
+				</ul>
+			</div>
+		</div>
+		
 
 		<!--about start -->
 		<section id="about" class="about">
-			<div class="section-heading text-center">
-				<h2 id="about" class="about">about me</h2>
+			<div class="section-heading text-center" data-reveal>
+				<h2 class="about">about me</h2>
 			</div>
 			<div class="container">
 				<div class="about-content">
 				
 					<div class="row">
 						<div class="col-sm-6">
-							<div class="single-about-txt">
+							<div class="single-about-txt" data-reveal="left">
 							
 								<h3>
-								I'm passionate about ensuring quality in the world of technology. With over 1 years of experience in the computer industry, I've become a seasoned expert in the art of Quality Assurance (QA).
+								I'm an ERP Business Analyst who turns business requirements into practical ERP solutions, with hands-on experience in Odoo implementation, process analysis and functional configuration.
 								</h3>
 								<p>
-								From carefully crafting test plans to diving deep into automation frameworks, I thrive on the challenges that come with ensuring that every product meets the highest standards. My journey in QA has taken me from the trenches of manual testing to the cutting-edge realm of automation, where I've honed my skills in Selenium WebDriver, TestNG, and Agile methodologies.
-
-But QA isn't just about finding bugs—it's about being a champion for the user experience. That's why I'm committed to not only identifying issues but also advocating for solutions that enhance usability and functionality. Whether it's performing security testing or fine-tuning regression tests, I'm always striving to deliver products that exceed expectations.
-
-Outside of the QA world, you can find me exploring new hiking trails, challenging friends to a game of table tennis, or simply enjoying the great outdoors. Because just like in QA, life is all about finding balance and embracing every challenge with enthusiasm.
+								I currently work as an ERP Business Analyst at Nexus Incorporation Pvt. Ltd. My work covers requirement gathering, business process mapping and gap analysis, and I prepare BRDs, functional specifications, test cases, process flows and user documentation. I coordinate with developers and stakeholders on customizations, enhancements and issue resolution, and I support functional testing, UAT and post-implementation activities.
 								</p>
-								<div class="row">
-									<div class="col-sm-4">
-										<div class="single-about-add-info">
-											<h3>phone</h3>
-											<p><a href="tel:+977-9864154032">+977-9860934210</a></p>
-										</div>
+								<p>
+								Before that, I worked as a Functional Consultant at Innovax Solutions, where I started as an intern in October 2024. There I coordinated Odoo ERP implementation projects, configured and validated modules including CRM, Sales, Purchase, Inventory, HR, Payroll and Project Management, and supported UAT, user training and go-live.
+								</p>
+								<p>
+								I recently completed my Bachelor in Information Management at St. Xavier's College, Kathmandu. My background also includes a Quality Assurance diploma and project management internships, and I enjoy working between business and technical teams while supporting the end users who rely on the system.
+								</p>
+								<div class="about-info">
+									<div class="single-about-add-info">
+										<h3>email</h3>
+										<p><a href="mailto:stharooza3@gmail.com">stharooza3@gmail.com</a></p>
 									</div>
-									<div class="col-sm-4">
-										<div class="single-about-add-info">
-											<h3>email</h3>
-											<p><a href="roja.stha016@gmail.com.np">roja.stha016@gmail.com</a></p>
-										</div>
+									<div class="single-about-add-info">
+										<h3>location</h3>
+										<p>Kalanki, Kathmandu, Nepal</p>
 									</div>
-									<div class="col-sm-4">
-										<div class="single-about-add-info">
-											<h3>website</h3>
-											<p><a href="https://rojashrestha.com.np" target="_blank">www.rojashrestha.com.np</a></p>
-										</div>
+									<div class="single-about-add-info">
+										<h3>website</h3>
+										<p><a href="https://rojashrestha.com.np" target="_blank" rel="noopener">www.rojashrestha.com.np</a></p>
 									</div>
 								</div>
 							</div>
 						</div>
 						<div class="col-sm-offset-1 col-sm-5">
-							<div class="single-about-img">
-								<img src="assets/images/about/profile_image.jpeg" alt="profile_image">
+							<div class="single-about-img" data-reveal="right">
+								<img src="assets/images/about/profile_image.jpeg" alt="Portrait of Roja Shrestha">
 								<div class="about-list-icon">
 									<ul>
 										<li>
@@ -226,6 +266,12 @@ Outside of the QA world, you can find me exploring new hiking trails, challengin
 
 						</div>
 					</div>
+					<div class="about-stats" data-reveal>
+						<div class="stat"><span class="stat-num" data-since="2024-10">2</span><span class="stat-plus">+</span><span class="stat-label">Years in ERP</span></div>
+						<div class="stat"><span class="stat-num" data-count="7">7</span><span class="stat-label">Odoo modules configured</span></div>
+						<div class="stat"><span class="stat-num" data-count="3">3</span><span class="stat-label">Projects built</span></div>
+						<div class="stat"><span class="stat-num" data-count-certs>20</span><span class="stat-label">Certificates &amp; credentials</span></div>
+					</div>
 				</div>
 			</div>
 		</section><!--/.about-->
@@ -234,14 +280,14 @@ Outside of the QA world, you can find me exploring new hiking trails, challengin
 		<!--education start -->
 		<section id="education" class="education">
 		<div id="edubg">
-			<div class="section-heading text-center">
+			<div class="section-heading text-center" data-reveal>
 				<h2>education</h2>
 			</div>
 			<div class="container">
 				<div class="education-horizontal-timeline">
 					<div class="row">
 						<div class="col-sm-4">
-							<div class="single-horizontal-timeline">
+							<div class="single-horizontal-timeline" data-reveal>
 								<div class="experience-time">
 									<h2>Passing Year - 2026</h2>
 									<h3>Bachelor <span>of </span> Information Management</h3>
@@ -253,7 +299,7 @@ Outside of the QA world, you can find me exploring new hiking trails, challengin
 								<div class="timeline">
 									<div class="timeline-content">
 										<h4 class="title">
-											Affilated to Tribhuwan University
+											Affiliated to Tribhuvan University
 										</h4>
 										<h5>St.Xavier's College, Maitighar,Kathmandu</h5>
 										
@@ -262,7 +308,7 @@ Outside of the QA world, you can find me exploring new hiking trails, challengin
 							</div>
 						</div>
 						<div class="col-sm-4">
-							<div class="single-horizontal-timeline">
+							<div class="single-horizontal-timeline" data-reveal>
 								<div class="experience-time">
 									<h2>Passing year - 2019</h2>
 									<h3>CAIE A LEVELS <span> </span></h3>
@@ -274,7 +320,7 @@ Outside of the QA world, you can find me exploring new hiking trails, challengin
 								<div class="timeline">
 									<div class="timeline-content">
 									    <h4 class="title">
-											Cambrige Assessment International Education
+											Cambridge Assessment International Education
 										</h4>
 										<h5>St.Xavier's College, Maitighar, Kathmandu</h5>
 										
@@ -283,10 +329,13 @@ Outside of the QA world, you can find me exploring new hiking trails, challengin
 							</div>
 						</div>
 						<div class="col-sm-4">
-							<div class="single-horizontal-timeline">
+							<div class="single-horizontal-timeline" data-reveal>
 								<div class="experience-time">
 									<h2>Passing Year - 2017</h2>
-									<h3>Secondary Education Examination<span>SEE </span> </h3>
+									<h3>Secondary Education Examination <span>(SEE)</span></h3>
+									<p class="description">
+											3.85
+									</p>
 								</div><!--/.experience-time-->
 								<div class="timeline-horizontal-border">
 									<i class="fa fa-circle" aria-hidden="true"></i>
@@ -298,7 +347,7 @@ Outside of the QA world, you can find me exploring new hiking trails, challengin
 										<h4 class="title">
 											SEE Board
 										</h4>
-										<h5>Rhododendron Internation Higher Secondary Boarding School</h5>
+										<h5>Rhododendron International Higher Secondary Boarding School</h5>
 										<p class="description">
 											3.75
 										</p>
@@ -317,108 +366,97 @@ Outside of the QA world, you can find me exploring new hiking trails, challengin
 		<section id="skills" class="skills">
 		
 				<div class="skill-content">
-					<div class="section-heading text-center">
+					<div class="section-heading text-center" data-reveal>
 						<h2>skills</h2>
 					</div>
 					<div class="container">
+						<div class="skill-groups">
 						<div class="row">
-							<div class="col-md-6">
-								<div class="single-skill-content">
-									<div class="barWrapper">
-										<span class="progressText">Quality Assurance</span>
-										<div class="single-progress-txt">
-											<div class="progress ">
-												<div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="10" aria-valuemax="100" style="background:#34c505;">
-													  
-												</div>
-											</div>
-											<h3 style="color:#34c505;">60%</h3>	
-										</div>
-									</div><!-- /.barWrapper -->
-									<div class="barWrapper">
-										<span class="progressText">Software Testing</span>
-										<div class="single-progress-txt">
-											<div class="progress ">
-											   <div class="progress-bar" role="progressbar" aria-valuenow="85" aria-valuemin="10" aria-valuemax="100" style="background:#34c505;">
-												    
-											   </div>
-											</div>
-											<h3 style="color:#34c505;">70%</h3>	
-										</div>
-									</div><!-- /.barWrapper -->
-									<div class="barWrapper">
-										<span class="progressText">JAVA</span>
-										<div class="single-progress-txt">
-											<div class="progress ">
-											   <div class="progress-bar" role="progressbar" aria-valuenow="97" aria-valuemin="10" aria-valuemax="100" style="">
-												   
-											   </div>
-											</div>
-											<h3>70%</h3>	
-										</div>
-									</div><!-- /.barWrapper -->
-									<div class="barWrapper">
-										<span class="progressText">Automation (Selenium)</span>
-										<div class="single-progress-txt">
-											<div class="progress ">
-											   <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="10" aria-valuemax="100" style="">
-												    
-											   </div>
-											</div>
-											<h3>70%</h3>	
-										</div>
-									</div><!-- /.barWrapper -->
+							<div class="col-md-4 col-sm-6">
+								<div class="skill-group tilt-card" data-reveal>
+									<h3><i class="fa fa-sitemap" aria-hidden="true"></i>ERP &amp; Business Analysis</h3>
+									<ul class="skill-chips">
+											<li>ERP Business Analysis</li>
+											<li>Odoo Functional Consulting</li>
+											<li>ERP Implementation</li>
+											<li>Requirement Gathering</li>
+											<li>Business Process Mapping</li>
+											<li>Gap Analysis</li>
+											<li>Workflow Configuration</li>
+									</ul>
 								</div>
 							</div>
-							<div class="col-md-6">
-								<div class="single-skill-content">
-									<div class="barWrapper">
-										<span class="progressText">Requirement Analysis, Planning & Brainstorming</span>
-										<div class="single-progress-txt">
-											<div class="progress ">
-												<div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="10" aria-valuemax="100" style="background:#34c505;">
-													
-												</div>
-											</div>
-											<h3 style="color:#34c505;">90%</h3>	
-										</div>
-									</div><!-- /.barWrapper -->
-									<div class="barWrapper">
-										<span class="progressText">API Testing</span>
-										<div class="single-progress-txt">
-											<div class="progress ">
-											   <div class="progress-bar" role="progressbar" aria-valuenow="85" aria-valuemin="10" aria-valuemax="100" style="">
-												    
-											   </div>
-											</div>
-											<h3>80%</h3>	
-										</div>
-									</div><!-- /.barWrapper -->
-									<div class="barWrapper">
-										<span class="progressText">Performance Testing</span>
-										<div class="single-progress-txt">
-											<div class="progress ">
-											   <div class="progress-bar" role="progressbar" aria-valuenow="97" aria-valuemin="10" aria-valuemax="100" style="">
-												   
-											   </div>
-											</div>
-											<h3>80%</h3>	
-										</div>
-									</div><!-- /.barWrapper -->
-									<div class="barWrapper">
-										<span class="progressText"> Test Planning, Test Cases, User Stories</span>
-										<div class="single-progress-txt">
-											<div class="progress ">
-											   <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="10" aria-valuemax="100" style="background:#34c505;">
-												    
-											   </div>
-											</div>
-											<h3 style="color:#34c505;">90%</h3>	
-										</div>
-									</div><!-- /.barWrapper -->
+							<div class="col-md-4 col-sm-6">
+								<div class="skill-group tilt-card" data-reveal>
+									<h3><i class="fa fa-cubes" aria-hidden="true"></i>Odoo Modules</h3>
+									<ul class="skill-chips">
+											<li>CRM</li>
+											<li>Sales</li>
+											<li>Purchase</li>
+											<li>Inventory</li>
+											<li>HR</li>
+											<li>Payroll</li>
+											<li>Project Management</li>
+									</ul>
+								</div>
+							</div>
+							<div class="col-md-4 col-sm-6">
+								<div class="skill-group tilt-card" data-reveal>
+									<h3><i class="fa fa-file-text-o" aria-hidden="true"></i>Documentation</h3>
+									<ul class="skill-chips">
+											<li>BRD</li>
+											<li>Functional Specifications</li>
+											<li>User Manuals</li>
+											<li>SOPs</li>
+											<li>Process Flows</li>
+											<li>Test Cases</li>
+									</ul>
+								</div>
+							</div>
+							<div class="col-md-4 col-sm-6">
+								<div class="skill-group tilt-card" data-reveal>
+									<h3><i class="fa fa-check-square-o" aria-hidden="true"></i>Testing &amp; Delivery</h3>
+									<ul class="skill-chips">
+											<li>Functional Testing</li>
+											<li>UAT Coordination</li>
+											<li>User Training</li>
+											<li>Issue Resolution</li>
+											<li>Troubleshooting</li>
+											<li>Postman</li>
+									</ul>
+								</div>
+							</div>
+							<div class="col-md-4 col-sm-6">
+								<div class="skill-group tilt-card" data-reveal>
+									<h3><i class="fa fa-wrench" aria-hidden="true"></i>Tools &amp; Technology</h3>
+									<ul class="skill-chips">
+											<li>MySQL</li>
+											<li>MongoDB</li>
+											<li>Git</li>
+											<li>GitHub</li>
+											<li>ClickUp</li>
+											<li>Google Docs</li>
+											<li>Microsoft Excel</li>
+									</ul>
+								</div>
+							</div>
+							<div class="col-md-4 col-sm-6">
+								<div class="skill-group tilt-card" data-reveal>
+									<h3><i class="fa fa-users" aria-hidden="true"></i>Professional Strengths</h3>
+									<ul class="skill-chips">
+											<li>Stakeholder Communication</li>
+											<li>Project Coordination</li>
+											<li>Analytical Thinking</li>
+											<li>Problem Solving</li>
+											<li>Time Management</li>
+											<li>Adaptability</li>
+											<li>Attention to Detail</li>
+											<li>Client Handling</li>
+									</ul>
 								</div>
 							</div>
 						</div><!-- /.row -->
+						</div><!-- /.skill-groups -->
 					</div>	<!-- /.container -->		
 				</div><!-- /.skill-content-->
 				
@@ -428,168 +466,223 @@ Outside of the QA world, you can find me exploring new hiking trails, challengin
 		<!--experience start -->
 		<section id="experience" class="experience">
 			<div id="expbg">
-				<div class="section-heading text-center">
+				<div class="section-heading text-center" data-reveal>
 					<h2>Experience</h2>
 				</div>
 				<div class="container">
 					<div class="experience-content">
-						<div class="main-timeline">
-							<ul>
-								<li>
-									<div class="single-timeline-box fix">
-										<div class="row">
-											<div class="col-md-5">
-												<div class="experience-time text-right">
-													<h2>2022 - Present</h2>
-													<h3>Facilitator</h3>
-												</div><!--/.experience-time-->
-											</div><!--/.col-->
-											<div class="col-md-offset-1 col-md-5">
-												<div class="timeline">
-													<div class="timeline-content">
-														<h4 class="title">
-															<span><i class="fa fa-circle" aria-hidden="true"></i></span>
-															<span style="color:#0060c7;">Facilitator</span>
-														</h4>
-														<h5>Kathmandu, Nepal</h5>
-														<p class="description">
-															As a Facilitator, I analyze registration data, assess trainee performance, and prepare insightful reports. My role involves providing essential materials to trainers and ensuring trainees reach their full potential.
-														</p>
-													</div><!--/.timeline-content-->
-												</div><!--/.timeline-->
-											</div><!--/.col-->
-										</div>
-									</div><!--/.single-timeline-box-->
-								</li>
-		
-								<li>
-									<div class="single-timeline-box fix">
-										<div class="row">
-											<div class="col-md-offset-1 col-md-5 experience-time-responsive">
-												<div class="experience-time">
-													<h2>2022 - Present</h2>
-													<h3>Tutor</h3>
-												</div><!--/.experience-time-->
-											</div><!--/.col-->
-											<div class="col-md-5">
-												<div class="timeline">
-													<div class="timeline-content text-right">
-														<h4 class="title">
-															<span><i class="fa fa-circle" aria-hidden="true"></i></span>
-															<span style="color:#0060c7;">Tutor</span>
-														</h4>
-														<h5>Kathmandu, Nepal</h5>
-														<p class="description">
-															As a Tutor, I specialize in teaching advanced-level mathematics to 12th-grade students and offering comprehensive educational assistance to 8th to 10th graders. My role is to help students excel academically by breaking down complex topics into easily understandable concepts.
-														</p>
-													</div><!--/.timeline-content-->
-												</div><!--/.timeline-->
-											</div><!--/.col-->
-										</div>
-									</div><!--/.single-timeline-box-->
-								</li>
-		
-								<li>
-									<div class="single-timeline-box fix">
-										<div class="row">
-											<div class="col-md-5">
-												<div class="experience-time text-right">
-													<h2>2023 - Present</h2>
-													<h3>Project Management and Content Creation</h3>
-												</div><!--/.experience-time-->
-											</div><!--/.col-->
-											<div class="col-md-offset-1 col-md-5">
-												<div class="timeline">
-													<div class="timeline-content">
-														<h4 class="title">
-															<span><i class="fa fa-circle" aria-hidden="true"></i></span>
-															<span style="color:#0060c7;">Project Manager</span>
-														</h4>
-														<h5>Kathmandu, Nepal</h5>
-														<p class="description">
-															I oversee project management and create educational content, applying my technical expertise and leadership skills to deliver quality results. My work involves coordinating with teams and developing materials that drive learning and engagement.
-														</p>
-													</div><!--/.timeline-content-->
-												</div><!--/.timeline-->
-											</div><!--/.col-->
-										</div>
-									</div><!--/.single-timeline-box-->
-								</li>
-		
-							</ul>
-						</div><!--.main-timeline-->
+						<div class="xp-timeline">
+							<span class="xp-line-fill" aria-hidden="true"></span>
+							<ol class="xp-list">
+							<li class="xp-item" data-reveal>
+								<div class="xp-when"><span class="xp-date">Jun 2026 &ndash; Present</span><span class="xp-state">Current</span></div>
+								<span class="xp-dot" aria-hidden="true"></span>
+								<article class="xp-card">
+									<h3>ERP Business Analyst</h3>
+									<h4>Nexus Incorporation Pvt. Ltd.</h4>
+									<ul class="xp-points">
+											<li>Analyze business requirements and translate them into practical ERP workflows and functional solutions.</li>
+											<li>Conduct requirement gathering, process analysis, gap analysis and workflow mapping.</li>
+											<li>Prepare BRDs, functional specifications, test cases, process flows and user documentation.</li>
+											<li>Configure and validate ERP processes based on business requirements and standard functionality.</li>
+											<li>Coordinate with developers and stakeholders on customizations, enhancements and issue resolution.</li>
+											<li>Perform functional testing and UAT while supporting implementation and post-implementation activities.</li>
+									</ul>
+								</article>
+							</li>
+							<li class="xp-item" data-reveal>
+								<div class="xp-when"><span class="xp-date">Jan 2025 &ndash; Jun 2026</span></div>
+								<span class="xp-dot" aria-hidden="true"></span>
+								<article class="xp-card">
+									<h3>Functional Consultant</h3>
+									<h4>Innovax Solutions Pvt. Ltd.</h4>
+									<ul class="xp-points">
+											<li>Coordinated Odoo ERP implementation projects, requirements, timelines and client deliverables.</li>
+											<li>Conducted requirement gathering, gap analysis and workflow design across business functions.</li>
+											<li>Prepared BRDs, functional specifications, process flows, user manuals and implementation documentation.</li>
+											<li>Configured and validated Odoo modules including CRM, Sales, Purchase, Inventory, HR, Payroll and Project Management.</li>
+											<li>Coordinated with developers on customizations, enhancements, integrations, testing and issue resolution.</li>
+											<li>Supported UAT, user training, go-live activities and post-implementation assistance.</li>
+									</ul>
+								</article>
+							</li>
+							<li class="xp-item" data-reveal>
+								<div class="xp-when"><span class="xp-date">Oct 2024 &ndash; Jan 2025</span></div>
+								<span class="xp-dot" aria-hidden="true"></span>
+								<article class="xp-card">
+									<h3>Functional Consultant Intern</h3>
+									<h4>Innovax Solutions Pvt. Ltd.</h4>
+									<ul class="xp-points">
+											<li>Assisted in Odoo implementation, functional testing, requirement analysis and documentation.</li>
+											<li>Supported user manuals, implementation notes, defect tracking, client demonstrations and training.</li>
+									</ul>
+								</article>
+							</li>
+							<li class="xp-item" data-reveal>
+								<div class="xp-when"><span class="xp-date">2024 &ndash; 2025</span></div>
+								<span class="xp-dot" aria-hidden="true"></span>
+								<article class="xp-card">
+									<h3>Project Manager Associate Intern</h3>
+									<h4>Voyager IT Company</h4>
+									<ul class="xp-points">
+											<li>Worked as a project manager associate intern at Voyager IT Company.</li>
+									</ul>
+								</article>
+							</li>
+							<li class="xp-item" data-reveal>
+								<div class="xp-when"><span class="xp-date">Completed Mar 2025</span></div>
+								<span class="xp-dot" aria-hidden="true"></span>
+								<article class="xp-card">
+									<h3>Project Management Associate Intern (Virtual)</h3>
+									<h4>Excelerate &times; Saint Louis University</h4>
+									<ul class="xp-points">
+											<li>Completed the Project Management Associate internship powered by Excelerate, in partnership with Saint Louis University.</li>
+									</ul>
+								</article>
+							</li>
+							</ol>
+						</div><!--/.xp-timeline-->
 					</div><!--.experience-content-->
 				</div>
 			</div>
 		</section><!--/.experience-->
+
+		<!--projects start -->
+		<section id="projects" class="projects">
+			<div class="section-heading text-center" data-reveal>
+				<h2>projects</h2>
+			</div>
+			<div class="container">
+				<div class="projects-content">
+					<div class="row">
+						<div class="col-md-4 col-sm-6">
+								<article class="project-card tilt-card" data-reveal>
+									<h3>EduSanchal</h3>
+									<span class="project-type">School Management System</span>
+									<p>Developed role-based workflows for Admin, Teacher and Student users, including attendance and scheduling.</p>
+									<ul class="pc-tags"><li>Role-based access</li><li>Attendance</li><li>Scheduling</li></ul>
+								</article>
+							</div>
+							<div class="col-md-4 col-sm-6">
+								<article class="project-card tilt-card" data-reveal>
+									<h3>Doctor Appointment System</h3>
+									<span class="project-type">Healthcare booking</span>
+									<p>Built secure workflows with authentication and structured data handling.</p>
+									<ul class="pc-tags"><li>Authentication</li><li>Secure workflows</li><li>Structured data</li></ul>
+								</article>
+							</div>
+							<div class="col-md-4 col-sm-6">
+								<article class="project-card tilt-card" data-reveal>
+									<h3>SwadExpress</h3>
+									<span class="project-type">Food Delivery System</span>
+									<p>Developed order management workflows and database-driven operations.</p>
+									<ul class="pc-tags"><li>Order management</li><li>Database-driven</li></ul>
+								</article>
+							</div>
+					</div><!--/.row-->
+					<p class="projects-more" data-reveal><a href="https://github.com/RoozaStha" target="_blank" rel="noopener">See more on GitHub</a></p>
+				</div><!--/.projects-content-->
+			</div><!--/.container-->
+		</section><!--/.projects-->
+		<!--projects end -->
+
 		
 		<!--portfolio end -->
 		<!--portfolio start -->
 		<section id="portfolio" class="portfolio">
 			<div class="portfolio-details">
-				<div class="section-heading text-center">
+				<div class="section-heading text-center" data-reveal>
 					<h2>Certifications</h2>
 				</div>
 				<div class="container">
 					<div class="portfolio-content">
-						<div class="isotope">
-							<div class="row">
-
-								<div class="col-sm-4">
-									<div class="item">
-										<img src="assets/images/portfolio/p1.jpg" alt="portfolio image"/>
-										<div class="isotope-overlay">
-											<a href="https://testautomationu.applitools.com/certificate/?id=7944dda8-" target="_blank">
-												API Testing with POSTMAN
-											</a>
-										</div><!-- /.isotope-overlay -->
-									</div><!-- /.item -->
-									<div class="item">
-										<img src="assets/images/portfolio/p2.jpg" alt="portfolio image"/>
-										<div class="isotope-overlay">
-											<a href="p2.jpg" target="_blank">
-												Full Stack Devlopment
-											</a>
-										</div><!-- /.isotope-overlay -->
-									</div><!-- /.item -->
-								</div><!-- /.col -->
-
-								<div class="col-sm-4">
-									<div class="item">
-										<img src="assets/images/portfolio/p3.jpg" alt="portfolio image"/>
-										<div class="isotope-overlay">
-											<a href="p3.jpg" target="_blank">
-												Aspire leadership Program
-											</a>
-										</div><!-- /.isotope-overlay -->
-									</div><!-- /.item -->
-								</div><!-- /.col -->
-
-								<div class="col-sm-4">
-									<div class="item">
-										<img src="assets/images/portfolio/p4.jpg" alt="portfolio image"/>
-										<div class="isotope-overlay">
-											<a href="https://testautomationu.applitools.com/certificate/?id=99bb2624" target="_blank">
-												Selenium IDE
-											</a>
-										</div><!-- /.isotope-overlay -->
-									</div><!-- /.item -->
-									<div class="item">
-										<img src="assets/images/portfolio/p5.jpg" alt="portfolio image"/>
-										<div class="isotope-overlay">
-											<a href="https://olympus.mygreatlearning.com/courses/43771/certificate-" target="_blank">
-												Software Testing
-											</a>
-										</div><!-- /.isotope-overlay -->
-									</div><!-- /.item -->
-									
-								</div><!-- /.col -->
-							</div><!-- /.row -->
-						</div><!--/.isotope-->
-					</div><!--/.gallery-content-->
+						<div class="cert-filters" role="group" aria-label="Filter certificates">
+							<button type="button" class="cert-filter" data-filter="all" aria-pressed="true">All<span class="cf-count"></span></button>
+							<button type="button" class="cert-filter" data-filter="erp" aria-pressed="false">ERP &amp; Project Management<span class="cf-count"></span></button>
+							<button type="button" class="cert-filter" data-filter="qa" aria-pressed="false">QA &amp; Testing<span class="cf-count"></span></button>
+							<button type="button" class="cert-filter" data-filter="dev" aria-pressed="false">Development &amp; Leadership<span class="cf-count"></span></button>
+						</div>
+						<p class="sr-only" id="certStatus" role="status" aria-live="polite"></p>
+						<ul class="cert-grid">
+							<li class="cert-card" data-cat="erp" data-reveal>
+								<span class="cert-feat">In my CV</span><span class="cert-year">2026</span><button type="button" class="cert-open" data-full="assets/images/portfolio/odoo-18-functional.jpg" data-title="Odoo 18 Functional Certification" data-issuer="Odoo HK Limited" data-year="2026" data-link="" aria-haspopup="dialog">
+									<span class="cert-thumb"><img src="assets/images/portfolio/odoo-18-functional.jpg" alt="Odoo 18 Functional Certification certificate" loading="lazy"></span>
+									<span class="cert-body"><span class="cert-title">Odoo 18 Functional Certification</span><span class="cert-issuer">Odoo HK Limited</span></span>
+								</button>
+							</li>
+							<li class="cert-card" data-cat="erp" data-reveal>
+								<span class="cert-feat">In my CV</span><span class="cert-year">2025</span><button type="button" class="cert-open" data-full="assets/images/portfolio/excelerate-pm-associate.jpg" data-title="Project Management Associate Internship" data-issuer="Excelerate &times; Saint Louis University" data-year="2025" data-link="" aria-haspopup="dialog">
+									<span class="cert-thumb"><img src="assets/images/portfolio/excelerate-pm-associate.jpg" alt="Project Management Associate Internship certificate" loading="lazy"></span>
+									<span class="cert-body"><span class="cert-title">Project Management Associate Internship</span><span class="cert-issuer">Excelerate &times; Saint Louis University</span></span>
+								</button>
+							</li>
+							<li class="cert-card" data-cat="qa" data-reveal>
+								<span class="cert-feat">In my CV</span><button type="button" class="cert-open" data-full="assets/images/portfolio/qa-diploma.jpg" data-title="Quality Assurance Diploma" data-issuer="Skill Shikshya &middot; Vrit Technology &middot; 150 hours" data-year="" data-link="" aria-haspopup="dialog">
+									<span class="cert-thumb"><img src="assets/images/portfolio/qa-diploma.jpg" alt="Quality Assurance Diploma certificate" loading="lazy"></span>
+									<span class="cert-body"><span class="cert-title">Quality Assurance Diploma</span><span class="cert-issuer">Skill Shikshya &middot; Vrit Technology &middot; 150 hours</span></span>
+								</button>
+							</li>
+							<li class="cert-card" data-cat="qa" data-reveal>
+								<button type="button" class="cert-open" data-full="assets/images/portfolio/p1.jpg" data-title="API Testing with Postman" data-issuer="Test Automation University" data-year="" data-link="https://testautomationu.applitools.com/certificate/?id=7944dda8" aria-haspopup="dialog">
+									<span class="cert-thumb"><img src="assets/images/portfolio/p1.jpg" alt="API Testing with Postman certificate" loading="lazy"></span>
+									<span class="cert-body"><span class="cert-title">API Testing with Postman</span><span class="cert-issuer">Test Automation University</span></span>
+								</button>
+							</li>
+							<li class="cert-card" data-cat="qa" data-reveal>
+								<span class="cert-year">2024</span><button type="button" class="cert-open" data-full="assets/images/portfolio/tau-continuous-testing.jpg" data-title="The Whole Team Approach to Continuous Testing" data-issuer="Test Automation University" data-year="2024" data-link="https://testautomationu.applitools.com/certificate/?id=160c8c48" aria-haspopup="dialog">
+									<span class="cert-thumb"><img src="assets/images/portfolio/tau-continuous-testing.jpg" alt="The Whole Team Approach to Continuous Testing certificate" loading="lazy"></span>
+									<span class="cert-body"><span class="cert-title">The Whole Team Approach to Continuous Testing</span><span class="cert-issuer">Test Automation University</span></span>
+								</button>
+							</li>
+							<li class="cert-card" data-cat="qa" data-reveal>
+								<span class="cert-year">2024</span><button type="button" class="cert-open" data-full="assets/images/portfolio/tau-test-automation-foundation.jpg" data-title="Setting a Foundation for Successful Test Automation" data-issuer="Test Automation University" data-year="2024" data-link="https://testautomationu.applitools.com/certificate/?id=efa2980a" aria-haspopup="dialog">
+									<span class="cert-thumb"><img src="assets/images/portfolio/tau-test-automation-foundation.jpg" alt="Setting a Foundation for Successful Test Automation certificate" loading="lazy"></span>
+									<span class="cert-body"><span class="cert-title">Setting a Foundation for Successful Test Automation</span><span class="cert-issuer">Test Automation University</span></span>
+								</button>
+							</li>
+							<li class="cert-card" data-cat="qa" data-reveal>
+								<button type="button" class="cert-open" data-full="assets/images/portfolio/p4.jpg" data-title="Codeless Test Automation with Selenium IDE" data-issuer="Test Automation University" data-year="" data-link="" aria-haspopup="dialog">
+									<span class="cert-thumb"><img src="assets/images/portfolio/p4.jpg" alt="Codeless Test Automation with Selenium IDE certificate" loading="lazy"></span>
+									<span class="cert-body"><span class="cert-title">Codeless Test Automation with Selenium IDE</span><span class="cert-issuer">Test Automation University</span></span>
+								</button>
+							</li>
+							<li class="cert-card" data-cat="qa" data-reveal>
+								<button type="button" class="cert-open" data-full="assets/images/portfolio/p5.jpg" data-title="Software Testing Tutorial" data-issuer="Great Learning Academy" data-year="" data-link="https://olympus.mygreatlearning.com/courses/43771/certificate" aria-haspopup="dialog">
+									<span class="cert-thumb"><img src="assets/images/portfolio/p5.jpg" alt="Software Testing Tutorial certificate" loading="lazy"></span>
+									<span class="cert-body"><span class="cert-title">Software Testing Tutorial</span><span class="cert-issuer">Great Learning Academy</span></span>
+								</button>
+							</li>
+							<li class="cert-card" data-cat="dev" data-reveal>
+								<button type="button" class="cert-open" data-full="assets/images/portfolio/p2.jpg" data-title="Full Stack Software Developer" data-issuer="Itronix Solutions" data-year="" data-link="" aria-haspopup="dialog">
+									<span class="cert-thumb"><img src="assets/images/portfolio/p2.jpg" alt="Full Stack Software Developer certificate" loading="lazy"></span>
+									<span class="cert-body"><span class="cert-title">Full Stack Software Developer</span><span class="cert-issuer">Itronix Solutions</span></span>
+								</button>
+							</li>
+							<li class="cert-card" data-cat="dev" data-reveal>
+								<span class="cert-year">2024</span><button type="button" class="cert-open" data-full="assets/images/portfolio/p3-web.jpg" data-title="Aspire Leaders Program" data-issuer="Aspire Institute" data-year="2024" data-link="" aria-haspopup="dialog">
+									<span class="cert-thumb"><img src="assets/images/portfolio/p3-web.jpg" alt="Aspire Leaders Program certificate" loading="lazy"></span>
+									<span class="cert-body"><span class="cert-title">Aspire Leaders Program</span><span class="cert-issuer">Aspire Institute</span></span>
+								</button>
+							</li>
+						</ul>
+						<div class="more-certs" data-reveal>
+							<h3>More credentials</h3>
+							<ul>
+							<li><a href="https://testautomationu.applitools.com/certificate/?id=99bb2624" target="_blank" rel="noopener">Selenium WebDriver &ndash; Test Automation University</a></li>
+							<li><a href="https://testautomationu.applitools.com/certificate/?id=82395cf6" target="_blank" rel="noopener">Cypress &ndash; Test Automation University</a></li>
+							<li>JavaScript &ndash; Codeliber</li>
+							<li>Project Charter with Google Docs &ndash; Coursera</li>
+							<li>ClickUp &ndash; Coursera</li>
+							<li>Human Resource Management &ndash; Great Learning</li>
+							<li>Project Management Training &ndash; Skill Lab</li>
+							<li>Human Resource Training &ndash; Skill Lab</li>
+							<li>Content Writing Training &ndash; Skill Lab</li>
+							<li>Quantum Computing &ndash; St. Xavier&rsquo;s Physics Council Nepal</li>
+							</ul>
+						</div><!--/.more-certs-->
+					</div><!--/.portfolio-content-->
 				</div><!--/.container-->
 			</div><!--/.portfolio-details-->
-
 		</section><!--/.portfolio-->
 		<!--portfolio end -->
 		
@@ -597,14 +690,14 @@ Outside of the QA world, you can find me exploring new hiking trails, challengin
 		<!--profiles start -->
 		<section id="profiles" class="profiles">
 			<div class="profiles-details">
-				<div class="section-heading text-center">
+				<div class="section-heading text-center" data-reveal>
 					<h2>profiles</h2>
 				</div>
 				<div class="container">
 					<div class="profiles-content">
 						<div class="row">
 							<div class="col-sm-3">
-								<div class="single-profile">
+								<div class="single-profile" data-reveal>
 									<div class="profile-txt">
 										<a href=""><i class="flaticon-github-logo"></i></a>
 										<div class="profile-icon-name">github</div>
@@ -618,7 +711,7 @@ Outside of the QA world, you can find me exploring new hiking trails, challengin
 								</div>
 							</div>
 							<div class="col-sm-3">
-								<div class="single-profile">
+								<div class="single-profile" data-reveal>
 									<div class="profile-txt">
 										<a href=""><i class="flaticon-bitbucket-logotype-camera-lens-in-perspective"></i></a>
 										<div class="profile-icon-name">bitbucket</div>
@@ -632,7 +725,7 @@ Outside of the QA world, you can find me exploring new hiking trails, challengin
 								</div>
 							</div>
 							<div class="col-sm-3">
-								<div class="single-profile">
+								<div class="single-profile" data-reveal>
 									<div class="profile-txt">
 										<a href=""><i class="fa fa-linkedin"></i></a>
 										<div class="profile-icon-name">linkedin</div>
@@ -646,7 +739,7 @@ Outside of the QA world, you can find me exploring new hiking trails, challengin
 								</div>
 							</div>
 							<div class="col-sm-3">
-								<div class="single-profile profile-no-border">
+								<div class="single-profile profile-no-border" data-reveal>
 									<div class="profile-txt">
 										<a href=""><i class="fa fa-facebook"></i></a>
 										<div class="profile-icon-name">facebook</div>
@@ -663,7 +756,7 @@ Outside of the QA world, you can find me exploring new hiking trails, challengin
 						<div class="profile-border"></div>
 						<div class="row">
 							<div class="col-sm-3">
-								<div class="single-profile">
+								<div class="single-profile" data-reveal>
 									<div class="profile-txt">
 										<a href=""><i class="fa fa-instagram"></i></a>
 										<div class="profile-icon-name">instagram</div>
@@ -677,21 +770,16 @@ Outside of the QA world, you can find me exploring new hiking trails, challengin
 								</div>
 							</div>
 							<div class="col-sm-3">
-								<div class="single-profile">
+								<div class="single-profile" data-reveal>
 									<div class="profile-txt">
 										<a href=""><i class="fa fa-twitter"></i></a>
 										<div class="profile-icon-name">twitter</div>
 									</div>
-									<!-- <div class="single-profile-overlay"> 
-										<div class="profile-txt">
-											<a href="https://twitter.com/lavthaiba" target="_blank"><i class="fa fa-twitter"></i></a>
-											<div class="profile-icon-name">twitter</div>
-										</div>-->
-									</div>
+
 								</div>
 							</div>
 							<div class="col-sm-3">
-								<div class="single-profile">
+								<div class="single-profile" data-reveal>
 									<div class="profile-txt">
 										<a href=""><i class="fa fa-pinterest"></i></a>
 										<div class="profile-icon-name">pinterest</div>
@@ -705,7 +793,7 @@ Outside of the QA world, you can find me exploring new hiking trails, challengin
 								</div>
 							</div>
 							<div class="col-sm-3">
-								<div class="single-profile profile-no-border">
+								<div class="single-profile profile-no-border" data-reveal>
 									<div class="profile-txt">
 										<a href=""><i class="fa fa-youtube-play"></i></a>
 										<div class="profile-icon-name">youtube</div>
@@ -733,73 +821,76 @@ Outside of the QA world, you can find me exploring new hiking trails, challengin
 		<!--contact start -->
 		<section id="contact" class="contact">
 		<div id="contactbg">
-			<div class="section-heading text-center">
+			<div class="section-heading text-center" data-reveal>
 				<h2>contact me</h2>
 			</div>
 			<div class="container">
 				<div class="contact-content">
 					<div class="row">
 						<div class="col-md-offset-1 col-md-5 col-sm-6">
-							<div class="single-contact-box">
+							<div class="single-contact-box" data-reveal="left">
 								<div class="contact-form">
-										<form id="myForm" action="https://formspree.io/f/xkndyvqg" method="post" name="form">
-
+										<form id="myForm" action="https://formspree.io/f/https://formspree.io/f/mgaaaley" method="post" name="form" novalidate>
+										<div class="hp-field" aria-hidden="true"><label>Leave this field empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
+										<input type="hidden" name="_subject" value="New message from rojashrestha.com.np">
 										<div class="row">
 											<div class="col-sm-6 col-xs-12">
 												<div class="form-group">
-												  <input type="text" class="form-control" id="name" placeholder="Name*" name="name" required>
+													<label class="sr-only" for="name">Your name</label>
+													<input type="text" class="form-control" id="name" placeholder="Name*" name="name" autocomplete="name" required>
 												</div><!--/.form-group-->
 											</div><!--/.col-->
 											<div class="col-sm-6 col-xs-12">
 												<div class="form-group">
-													<input type="email" class="form-control" id="email" placeholder="Email*" name="email" required>
+													<label class="sr-only" for="email">Your email</label>
+													<input type="email" class="form-control" id="email" placeholder="Email*" name="email" autocomplete="email" required>
 												</div><!--/.form-group-->
 											</div><!--/.col-->
 										</div><!--/.row-->
 										<div class="row">
 											<div class="col-sm-12">
 												<div class="form-group">
-													<input type="text" class="form-control" id="subject" placeholder="Subject" name="subject">
+													<label class="sr-only" for="subject">Subject</label>
+													<input type="text" class="form-control" id="subject" placeholder="Subject" name="subject" autocomplete="off">
 												</div><!--/.form-group-->
 											</div><!--/.col-->
 										</div><!--/.row-->
 										<div class="row">
 											<div class="col-sm-12">
 												<div class="form-group">
-													<textarea class="form-control" rows="8" id="comment" placeholder="Message" name="message"></textarea>
+													<label class="sr-only" for="comment">Your message</label>
+													<textarea class="form-control" rows="8" id="comment" placeholder="Message*" name="message" autocomplete="off" required></textarea>
 												</div><!--/.form-group-->
 											</div><!--/.col-->
 										</div><!--/.row-->
 										<div class="row">
 											<div class="col-sm-12">
 												<div class="single-contact-btn">
-													<input type="submit" class="contact-btn" onclick="return submitForm();" value="Submit" name="submit">
+													<input type="submit" class="contact-btn" value="Send message" name="submit">
 												</div><!--/.single-single-contact-btn-->
 											</div><!--/.col-->
 										</div><!--/.row-->
+										<div class="form-status" id="formStatus" role="status" aria-live="polite" hidden></div>
 									</form><!--/form-->
 								</div><!--/.contact-form-->
-								<div id="successMessage" style="display: none;">
-									Thank you. Your form has been submitted!
-							</div>
 							</div><!--/.single-contact-box-->
 						</div><!--/.col-->
 						<div class="col-md-offset-1 col-md-5 col-sm-6">
 						
-							<div class="single-contact-box">
+							<div class="single-contact-box" data-reveal="right">
 								<div class="contact-adress">
 									<div class="contact-add-head">
 										<h3>Get In Touch</h3>
-										<p></p> Software QA Engineer</p>
+										<p>ERP Business Analyst &middot; Odoo Functional Consultant</p>
 									</div>
 									<div class="contact-add-info">
 										<div class="single-contact-add-info">
-											<h3>phone</h3>
-											<p><a href="tel:+977-9864154032">+977-9860934210</a></p>
+											<h3>email</h3>
+											<p><a href="mailto:stharooza3@gmail.com">stharooza3@gmail.com</a></p>
 										</div>
 										<div class="single-contact-add-info">
-											<h3>email</h3>
-											<p><a href="mailto:roja.stha016@gmail.com.np">roja.stha016@gmail.com.np</a></p>
+											<h3>location</h3>
+											<p>Kalanki, Kathmandu, Nepal</p>
 										</div>
 										<div class="single-contact-add-info">
 											<h3>website</h3>
@@ -835,7 +926,7 @@ Outside of the QA world, you can find me exploring new hiking trails, challengin
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center">
-                <div class="random-content-box">
+                <div class="random-content-box" data-reveal>
                     <p id="random-content"></p>
                     <button onclick="displayRandomContent()" class="quote">Refresh Quote</button>
                 </div>
@@ -866,40 +957,26 @@ Outside of the QA world, you can find me exploring new hiking trails, challengin
         </footer><!--/.footer-copyright-->
 		<!--footer-copyright end-->
 		
+		<!-- Certificate viewer -->
+		<dialog id="certDialog" class="cert-dialog" aria-labelledby="certDialogTitle">
+			<div class="cd-panel">
+				<button type="button" class="cd-btn cd-close" aria-label="Close certificate viewer">&times;</button>
+				<button type="button" class="cd-btn cd-prev" aria-label="Previous certificate">&lsaquo;</button>
+				<button type="button" class="cd-btn cd-next" aria-label="Next certificate">&rsaquo;</button>
+				<div class="cd-stage"><img src="" alt=""></div>
+				<div class="cd-info">
+					<div>
+						<h3 id="certDialogTitle"></h3>
+						<p class="cd-meta"></p>
+					</div>
+					<span class="cd-count" aria-hidden="true"></span>
+					<a class="cd-verify" href="#" target="_blank" rel="noopener" hidden>Verify credential</a>
+				</div>
+			</div>
+		</dialog>
+
 		<!-- Include all js compiled plugins (below), or include individual files as needed -->
 <script>
-    function submitForm(event) {
-        if (event) {
-           // event.preventDefault(); // Prevent default form submission
-            var form = event.target; // Get the form element
-        } else {
-            return; // If event is undefined, exit function
-        }
-
-        var isValid = form.checkValidity(); // Check if the form is valid
-
-        if (isValid) {
-            // Display success message
-            document.getElementById("successMessage").style.display = "block";
-
-            // Reset the form
-            //form.reset();
-			//setTimeout(function(){
-			//location.reload();
-			//}, 5000);
-			
-			
-        } else {
-            // If form is not valid, trigger HTML5 form validation
-            form.reportValidity();
-        }
-    }
-
-    document.addEventListener("DOMContentLoaded", function() {
-        var form = document.getElementById('myForm');
-        form.addEventListener("submit", submitForm);
-    });
-	
 		var randomContent = [
 		"Quality is never an accident; it is always the result of intelligent effort. - John Ruskin",
     "In the world of Internet Customer Service, it’s important to remember your competitor is only one mouse click away. - Doug Warner",
@@ -990,6 +1067,14 @@ Outside of the QA world, you can find me exploring new hiking trails, challengin
         
         <!--Custom JS-->
         <script src="assets/js/custom.js"></script>
+
+		<!-- GSAP + ScrollTrigger, then the motion layer (Step 2) -->
+		<script data-cfasync="false" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+		<script data-cfasync="false" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+		<script data-cfasync="false" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+		<script data-cfasync="false" src="assets/js/motion.js"></script>
+		<script data-cfasync="false" src="assets/js/certs.js"></script>
+		<script data-cfasync="false" src="assets/js/contact.js"></script>
 		
 		<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-MQW7DFR2LT"></script>
@@ -1001,8 +1086,7 @@ Outside of the QA world, you can find me exploring new hiking trails, challengin
 
   gtag('config', 'G-MQW7DFR2LT');
 </script>
-<script src="/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="ab2443e59f820ead4eafad36-|49" defer></script><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'8bbce6e23873988e',t:'MTcyNTEwNjA2NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"8bbce6e23873988e","version":"2024.8.0","r":1,"token":"6b5406da583946099b462ab38e18f93f","serverTiming":{"name":{"cfL4":true}}}' crossorigin="anonymous"></script>
-<!-- commit  -->
+<!-- committ  -->
     </body>
 	
 </html>

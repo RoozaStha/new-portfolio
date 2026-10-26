@@ -14,7 +14,7 @@ $(document).ready(function(){
 2. Smooth Scroll spy
 3. Progress-bar
 4. owl carousel
-5. welcome animation support
+5. (moved) hero intro animation -> motion.js
 ======================================*/
 
     // 1. Scroll To Top 
@@ -45,8 +45,14 @@ $(document).ready(function(){
 		$('li.smooth-menu a').bind("click", function(event) {
 			event.preventDefault();
 			var anchor = $(this);
+			var top = $(anchor.attr('href')).offset().top;
+			// Reduced motion (or motion.js inactive): jump instead of animating
+			if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+				$('html, body').scrollTop(top);
+				return;
+			}
 			$('html, body').stop().animate({
-				scrollTop: $(anchor.attr('href')).offset().top - 0
+				scrollTop: top
 			}, 1200,'easeInOutExpo');
 		});
 		
@@ -111,17 +117,7 @@ $(document).ready(function(){
 				})
 
 
-    // 5. welcome animation support
-
-        $(window).load(function(){
-        	$(".header-text h2,.header-text p").removeClass("animated fadeInUp").css({'opacity':'0'});
-            $(".header-text a").removeClass("animated fadeInDown").css({'opacity':'0'});
-        });
-
-        $(window).load(function(){
-        	$(".header-text h2,.header-text p").addClass("animated fadeInUp").css({'opacity':'0'});
-            $(".header-text a").addClass("animated fadeInDown").css({'opacity':'0'});
-        });
+    // 5. Hero intro animation now lives in assets/js/motion.js (GSAP).
 
 });	
 	
