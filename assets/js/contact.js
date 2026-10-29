@@ -54,8 +54,17 @@
           say('error', 'Sorry, the message could not be sent. Please try again or email me directly.');
         });
       })
-      .catch(function () {
-        say('error', 'Network problem: the message was not sent. Please check your connection or email me directly.');
+      .catch(function (err) {
+        // The request itself could not be completed (blocked by CORS, a page opened from
+        // file://, an ad blocker, a wrong form ID, or no internet at all).
+        if (window.console) console.error('[contact] fetch failed:', err);
+        if (navigator.onLine === false) {
+          say('error', 'You appear to be offline, so the message was not sent. Please reconnect and try again, or email me directly.');
+          return;
+        }
+        // A plain form post does not need CORS, so use it as a fallback.
+        say('info', 'Quick send was blocked, so I am using the standard form submission instead…');
+        form.submit();
       })
       .then(function () {
         button.disabled = false;
