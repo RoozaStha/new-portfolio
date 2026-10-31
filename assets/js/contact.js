@@ -1,7 +1,7 @@
 /* ==========================================================================
    contact.js  -  sends the contact form with fetch() and shows clear states
    The destination is the form's own action="" attribute in index.html, so
-   there is exactly one place to configure: https://formspree.io/f/YOUR_FORM_ID
+   there is exactly one place to configure (currently https://formspree.io/f/mgaaaley)
    ========================================================================== */
 (function () {
   'use strict';
@@ -64,7 +64,8 @@
         }
         // A plain form post does not need CORS, so use it as a fallback.
         say('info', 'Quick send was blocked, so I am using the standard form submission instead…');
-        form.submit();
+        // (called through the prototype so a field named "submit" can never shadow it)
+        HTMLFormElement.prototype.submit.call(form);
       })
       .then(function () {
         button.disabled = false;
