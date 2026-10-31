@@ -190,7 +190,7 @@ nav.navbar.bootsnav .navbar-toggle i{color: #007bff;}
     align-items: center;
     justify-content: center;
     position:relative;
-    background:url(../images/about/welcome-banner.jpg)no-repeat;
+    background:url(../images/about/welcome-banner.png)no-repeat;
     background-size:cover;
     background-position: center;
     height:890px;
@@ -369,7 +369,7 @@ span.single-timeline-horizontal.spacial-horizontal-line {width: 88px;}
 /*-------------------------------------
         6.  Skills
 --------------------------------------*/
-.skills {
+.skills{
     
 }
 .skill-content{padding: 50px 0 80px;}
