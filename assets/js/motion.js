@@ -125,6 +125,8 @@
   function heroIntro(parts) {
     if (heroStarted) return;
     heroStarted = true;
+    window.__portfolioReady = true;                                   // advanced.js waits for this
+    document.dispatchEvent(new CustomEvent('portfolio:ready'));
 
     var plainLines = parts.lines.filter(function (l) { return !l.hasAttribute('data-split'); });
     var tl = gsap.timeline({ defaults: { ease: 'power3.out' } });

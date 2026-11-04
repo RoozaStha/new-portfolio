@@ -1,0 +1,397 @@
+/* ==========================================================================
+   advanced.css  -  the "wow" layer
+   Load order: LAST (after style.css, responsive.css, motion.css, content.css).
+
+   1. Hero background (optimised image) + overlay
+   2. Swappable card decks (skills, projects)
+   3. Stacked experience cards
+   4. Ro, the guide character + speech bubble
+   5. Side dots, cursor ring, small extras
+   Everything interactive here is only switched on when JavaScript adds the
+   .motion-ready / .deck-active classes, so without JS or with reduced motion
+   the page falls back to plain, readable grids and lists.
+   ========================================================================== */
+
+/* 1. Hero ------------------------------------------------------------------ */
+.welcome-hero {
+  background-image: url(../images/about/hero-odoo.jpg);
+  background-image: image-set(
+    url(../images/about/hero-odoo.webp) type("image/webp"),
+    url(../images/about/hero-odoo.jpg) type("image/jpeg")
+  );
+  background-size: cover;
+  background-position: center;
+}
+.welcome-hero:before {
+  background:
+    radial-gradient(ellipse at 50% 42%, rgba(9, 6, 40, 0.5) 0%, rgba(9, 6, 40, 0.18) 62%, rgba(9, 6, 40, 0) 100%),
+    linear-gradient(180deg, rgba(12, 8, 54, 0.5) 0%, rgba(20, 10, 70, 0.1) 40%, rgba(12, 8, 54, 0.4) 100%);
+}
+.header-text h2 { text-shadow: 0 6px 30px rgba(8, 4, 40, 0.55); }
+.header-text p { text-shadow: 0 2px 14px rgba(8, 4, 40, 0.6); }
+@media (max-width: 767px) {
+  .welcome-hero { height: auto; min-height: 100vh; padding: 118px 0 96px; }
+  .header-text h2 { font-size: 40px; line-height: 1.35; }
+  .header-text p { font-size: 16px; margin: 16px 0 22px; }
+  .hero-role { margin-bottom: 4px; }
+  .hero-focus { margin: 0 0 30px !important; font-size: 13px; }
+  .hero-actions { gap: 12px; }
+  .header-text .hero-actions a { width: 168px; height: 52px; line-height: 50px; }
+  .welcome-hero {
+    background-image: url(../images/about/hero-odoo-m.jpg);
+    background-image: image-set(
+      url(../images/about/hero-odoo-m.webp) type("image/webp"),
+      url(../images/about/hero-odoo-m.jpg) type("image/jpeg")
+    );
+    background-position: 58% 50%;
+  }
+}
+
+/* 2. Decks ----------------------------------------------------------------- */
+.deck { position: relative; margin-top: 10px; }
+
+/* fallback (no JS / reduced motion): a tidy responsive grid */
+.deck-stage {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 28px;
+  outline: none;
+}
+.deck-stage:focus-visible { outline: 3px solid #007bff; outline-offset: 8px; border-radius: 12px; }
+.deck .skill-group, .deck .project-card { margin-bottom: 0; }
+.deck-ui, .deck-hint, .deck-toggle { display: none; }
+
+/* enhanced: 3D cover-flow */
+.deck-active .deck-stage {
+  display: block;
+  position: relative;
+  height: var(--deck-h, 480px);
+  perspective: 1500px;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: grab;
+}
+.deck-active .deck-stage:active { cursor: grabbing; }
+.deck-active .deck-card {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: min(430px, 84vw);
+  height: var(--deck-card-h, auto);
+  margin: 0;
+  overflow: hidden;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  box-shadow: 0 28px 60px rgba(14, 10, 70, 0.22);
+}
+.deck-active .deck-card:not(.is-front) { cursor: pointer; }
+.deck-card { border-top: 5px solid var(--c, #0060c7); }
+.deck-card::after {
+  content: "";
+  position: absolute;
+  right: -60px;
+  top: -60px;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--c, #0060c7) 0%, transparent 70%);
+  opacity: 0.14;
+  pointer-events: none;
+}
+.deck-card h3 .fa { color: var(--c, #0060c7); background: color-mix(in srgb, var(--c, #0060c7) 12%, #fff); }
+.deck-card h3 { color: var(--c, #0060c7); }
+.deck .skill-chips li:hover { background: var(--c, #0060c7); border-color: var(--c, #0060c7); }
+
+.deck-enhanced .deck-toggle {
+  display: block;
+  margin: 26px auto 0;
+  padding: 8px 20px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: #1f2c6c;
+  background: #fff;
+  border: 1px solid #d3e4f8;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+.deck-enhanced .deck-toggle:hover { color: #fff; background: #0060c7; border-color: #0060c7; }
+.deck-active .deck-ui {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 28px;
+}
+.deck-active .deck-hint {
+  display: block;
+  margin-top: 14px;
+  font-size: 12.5px;
+  letter-spacing: 0.4px;
+  text-align: center;
+  color: #6a708e !important;
+}
+.deck-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  font-size: 26px;
+  line-height: 1;
+  color: #1f2c6c;
+  background: #fff;
+  border: 1px solid #d3e4f8;
+  border-radius: 50%;
+  box-shadow: 0 6px 18px rgba(14, 25, 80, 0.1);
+  cursor: pointer;
+  transition: background-color 0.25s ease, color 0.25s ease, scale 0.2s ease;
+}
+.deck-btn:hover { color: #fff; background: #0060c7; scale: 1.08; }
+.deck-dots { display: flex; gap: 9px; }
+.deck-dot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  background: #c9d6e6;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.3s ease;
+}
+.deck-dot[aria-current="true"] { width: 30px; background: #0060c7; }
+
+.project-card { overflow: hidden; }
+.project-no {
+  position: absolute;
+  right: 22px;
+  top: 14px;
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--c, #0060c7);
+  opacity: 0.12;
+}
+.project-card h3 { color: var(--c, #0060c7); }
+
+/* 3. Stacked experience cards ------------------------------------------------ */
+.xs-wrap { max-width: 980px; margin: 0 auto; }
+.xs-list { margin: 0; padding: 0; list-style: none; }
+.xs-item { position: relative; margin-bottom: 34px; transform-origin: 50% 0; }
+.xs-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #e5ebf2;
+  border-radius: 18px;
+  box-shadow: 0 18px 50px rgba(14, 10, 70, 0.14);
+}
+.xs-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #0b0838;
+  opacity: var(--dim, 0);
+  pointer-events: none;
+  border-radius: inherit;
+}
+.xs-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 28px 26px;
+  color: #fff;
+  background: linear-gradient(165deg, #1a1a7a 0%, #4a2fd4 100%);
+}
+.xs-num { font-size: 62px; font-weight: 700; line-height: 0.9; color: rgba(255, 255, 255, 0.22); }
+.xs-date { font-size: 15px; font-weight: 500; letter-spacing: 0.3px; color: #dfe9ff; }
+.xs-state {
+  padding: 3px 12px;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #0d5a31;
+  background: #b9f2d1;
+  border-radius: 999px;
+}
+.xs-body { padding: 28px 34px 30px; }
+.xs-body h3 { margin: 0 0 4px; font-size: 21px; font-weight: 600; color: #1f2c6c; text-transform: none; }
+.xs-body h4 { margin: 0 0 16px; font-size: 14px; font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase; color: #0060c7; }
+.xs-body .xp-points li { font-size: 14px; }
+
+@media (min-width: 768px) {
+  .motion-ready .xs-item {
+    position: sticky;
+    top: calc(108px + var(--i, 0) * 16px);
+    margin-bottom: 70px;
+  }
+}
+@media (max-width: 767px) {
+  .xs-card { grid-template-columns: 1fr; }
+  .xs-side { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 10px 14px; padding: 18px 22px; }
+  .xs-num { font-size: 34px; }
+  .xs-body { padding: 22px 22px 24px; }
+}
+
+/* 4. Ro, the guide character ---------------------------------------------------- */
+.guide { display: none; }
+.motion-ready .guide {
+  position: fixed;
+  left: 16px;
+  bottom: 8px;
+  z-index: 9000;
+  display: block;
+  width: 132px;
+  pointer-events: none;
+}
+.guide > * { pointer-events: auto; }
+.guide-char {
+  display: block;
+  width: 132px;
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  filter: drop-shadow(0 14px 18px rgba(10, 6, 50, 0.3));
+}
+.guide-char svg { display: block; overflow: visible; }
+.guide-close {
+  position: absolute;
+  top: 28px;
+  left: -2px;
+  width: 24px;
+  height: 24px;
+  font-size: 16px;
+  line-height: 22px;
+  color: #fff;
+  background: rgba(31, 28, 110, 0.85);
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.guide:hover .guide-close, .guide-close:focus-visible { opacity: 1; }
+.guide-bubble {
+  position: absolute;
+  left: 74px;
+  bottom: 150px;
+  width: 250px;
+  padding: 13px 16px;
+  color: #1c1a4a;
+  background: #fff;
+  border-radius: 16px 16px 16px 4px;
+  box-shadow: 0 14px 40px rgba(14, 10, 70, 0.28);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.guide-bubble::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  bottom: -9px;
+  border: 9px solid transparent;
+  border-top-color: #fff;
+  border-bottom: 0;
+  border-left-width: 4px;
+}
+.guide-bubble .guide-text { margin: 0; font-size: 13.5px; line-height: 1.55; color: #1c1a4a !important; }
+.guide-bubble .guide-text:empty { display: none; }
+
+@media (max-width: 767px) {
+  .motion-ready .guide { left: 6px; width: 84px; }
+  .guide-char { width: 84px; }
+  .guide-char svg { width: 84px; height: 108px; }
+  .guide-bubble { left: 50px; bottom: 100px; width: 200px; padding: 10px 13px; }
+  .guide-bubble .guide-text { font-size: 12.5px; }
+  .guide-close { top: 14px; width: 22px; height: 22px; line-height: 20px; }
+}
+
+/* 5. Side dots + cursor ring ---------------------------------------------------- */
+.side-nav { display: none; }
+@media (min-width: 1200px) {
+  .motion-ready .side-nav {
+    position: fixed;
+    right: 22px;
+    top: 50%;
+    z-index: 9000;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transform: translateY(-50%);
+  }
+}
+.side-nav a {
+  position: relative;
+  display: block;
+  width: 12px;
+  height: 12px;
+  background: none !important;
+}
+.side-nav a span.sr-only { position: absolute; }
+.side-nav a::before {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  background: #b9c6dc;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(14, 10, 70, 0.25);
+  transition: inset 0.3s ease, background-color 0.3s ease;
+}
+.side-nav a::after {
+  content: attr(data-label);
+  position: absolute;
+  right: 26px;
+  top: 50%;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  color: #fff;
+  background: rgba(20, 16, 90, 0.92);
+  border-radius: 6px;
+  opacity: 0;
+  transform: translate(8px, -50%);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.side-nav a:hover::after, .side-nav a:focus-visible::after { opacity: 1; transform: translate(0, -50%); }
+.side-nav a.is-active::before { inset: 0; background: #4a2fd4; }
+
+.cursor-ring { display: none; }
+@media (hover: hover) and (pointer: fine) {
+  .motion-ready .cursor-ring {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 9995;
+    display: block;
+    width: 38px;
+    height: 38px;
+    margin: -19px 0 0 -19px;
+    border: 1.5px solid rgba(74, 47, 212, 0.55);
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0;
+    transition: width 0.3s ease, height 0.3s ease, margin 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
+  }
+  .cursor-ring.is-on { opacity: 1; }
+  .cursor-ring.is-hover { width: 64px; height: 64px; margin: -32px 0 0 -32px; background: rgba(74, 47, 212, 0.1); border-color: rgba(74, 47, 212, 0.8); }
+  .cursor-ring.is-drag { width: 78px; height: 78px; margin: -39px 0 0 -39px; background: rgba(0, 96, 199, 0.12); border-style: dashed; }
+}
+
+/* small extras */
+.single-about-img { overflow: hidden; }
+.section-heading h2 .ch { display: inline-block; white-space: pre; }
+
+/* reduced motion: show everything calmly */
+@media (prefers-reduced-motion: reduce) {
+  .guide, .side-nav, .cursor-ring { display: none !important; }
+  .xs-item { position: relative !important; top: auto !important; }
+}

@@ -85,6 +85,8 @@
         <link rel="stylesheet" href="assets/css/motion.css">
         <!--content.css (sections reworked from the updated CV)-->
         <link rel="stylesheet" href="assets/css/content.css">
+        <!--advanced.css (decks, stacked cards, guide character, hero)-->
+        <link rel="stylesheet" href="assets/css/advanced.css">
         
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -107,6 +109,65 @@
 			</div>
 		</div>
 		<div class="cursor-glow" aria-hidden="true"></div>
+		<div class="cursor-ring" aria-hidden="true"></div>
+
+		<!-- Side dots: where am I on the page -->
+		<nav class="side-nav" aria-label="Page sections">
+			<a href="#welcome-hero" data-label="Home"><span class="sr-only">Home</span></a>
+			<a href="#about" data-label="About"><span class="sr-only">About</span></a>
+			<a href="#education" data-label="Education"><span class="sr-only">Education</span></a>
+			<a href="#skills" data-label="Skills"><span class="sr-only">Skills</span></a>
+			<a href="#experience" data-label="Experience"><span class="sr-only">Experience</span></a>
+			<a href="#projects" data-label="Projects"><span class="sr-only">Projects</span></a>
+			<a href="#portfolio" data-label="Certificates"><span class="sr-only">Certificates</span></a>
+			<a href="#profiles" data-label="Profiles"><span class="sr-only">Profiles</span></a>
+			<a href="#contact" data-label="Contact"><span class="sr-only">Contact</span></a>
+		</nav>
+
+		<!-- Ro: the portfolio guide (a small animated character; decorative, hidden for reduced motion) -->
+		<aside class="guide" aria-label="Portfolio guide">
+			<div class="guide-bubble" aria-hidden="true"><p class="guide-text"></p></div>
+			<button type="button" class="guide-char" aria-label="Portfolio guide character. Press for another tip.">
+				<svg viewBox="0 0 180 232" width="132" height="170" role="presentation" focusable="false" aria-hidden="true">
+					<defs>
+						<linearGradient id="roHead" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9a86ff"/><stop offset="1" stop-color="#5a3df0"/></linearGradient>
+						<linearGradient id="roBody" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7a5cff"/><stop offset="1" stop-color="#3b2bb0"/></linearGradient>
+						<radialGradient id="roGlow"><stop offset="0" stop-color="#ffe08a"/><stop offset="1" stop-color="#ffb938" stop-opacity="0"/></radialGradient>
+					</defs>
+					<ellipse class="ro-shadow" cx="90" cy="222" rx="44" ry="7" fill="rgba(10,6,40,.28)"/>
+					<g class="ro-float">
+						<line x1="90" y1="40" x2="90" y2="20" stroke="#b9acff" stroke-width="4" stroke-linecap="round"/>
+						<circle class="ro-glow" cx="90" cy="14" r="17" fill="url(#roGlow)"/>
+						<circle class="ro-bulb" cx="90" cy="14" r="7" fill="#ffd166"/>
+						<rect x="22" y="68" width="14" height="30" rx="7" fill="#4a35c9"/>
+						<rect x="144" y="68" width="14" height="30" rx="7" fill="#4a35c9"/>
+						<rect x="32" y="36" width="116" height="92" rx="32" fill="url(#roHead)"/>
+						<rect x="45" y="48" width="90" height="68" rx="24" fill="#150c44"/>
+						<g class="ro-eyes">
+							<ellipse cx="70" cy="80" rx="12" ry="14" fill="#fff"/>
+							<ellipse cx="110" cy="80" rx="12" ry="14" fill="#fff"/>
+							<circle class="ro-pupil" cx="70" cy="81" r="6" fill="#150c44"/>
+							<circle class="ro-pupil" cx="110" cy="81" r="6" fill="#150c44"/>
+						</g>
+						<circle cx="55" cy="101" r="5" fill="#ff8fb8" opacity=".55"/>
+						<circle cx="125" cy="101" r="5" fill="#ff8fb8" opacity=".55"/>
+						<path class="ro-mouth" d="M79 100 Q90 110 101 100" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>
+						<rect x="52" y="132" width="76" height="62" rx="24" fill="url(#roBody)"/>
+						<circle cx="90" cy="162" r="15" fill="#fff" opacity=".16"/>
+						<text x="90" y="167" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="13" font-weight="700" fill="#fff">RS</text>
+						<rect class="ro-arm-l" x="35" y="140" width="15" height="44" rx="7.5" fill="#6c4cff"/>
+						<g class="ro-arm-r">
+							<rect x="130" y="140" width="15" height="44" rx="7.5" fill="#6c4cff"/>
+							<circle cx="137.5" cy="186" r="9" fill="#fff"/>
+						</g>
+						<rect x="66" y="192" width="19" height="20" rx="9" fill="#4a35c9"/>
+						<rect x="95" y="192" width="19" height="20" rx="9" fill="#4a35c9"/>
+					</g>
+				</svg>
+			</button>
+			<button type="button" class="guide-close" aria-label="Hide the portfolio guide">&times;</button>
+		</aside>
+
 	
 		<!-- Google Tag Manager (noscript) -->
 		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WFBPQ69S"
@@ -216,7 +277,7 @@
 								I currently work as an ERP Business Analyst at Nexus Incorporation Pvt. Ltd. My work covers requirement gathering, business process mapping and gap analysis, and I prepare BRDs, functional specifications, test cases, process flows and user documentation. I coordinate with developers and stakeholders on customizations, enhancements and issue resolution, and I support functional testing, UAT and post-implementation activities.
 								</p>
 								<p>
-								Before that, I worked as a Functional Consultant at Innovax Solutions, where I started as an intern in October 2024. There I coordinated Odoo ERP implementation projects, configured and validated modules including CRM, Sales, Purchase, Inventory, HR, Payroll and Project Management, and supported UAT, user training and go-live.
+								Before that, I worked as a Functional Consultant at Innovax Solutions, where I started as an intern in October 2024. There I coordinated Odoo ERP implementation projects, configured and validated modules including CRM, Sales, Purchase, Inventory, Accounting, Manufacturing, HR, Payroll, Expenses and Project Management, and supported UAT, user training and go-live.
 								</p>
 								<p>
 								I recently completed my Bachelor in Information Management at St. Xavier's College, Kathmandu. My background also includes a Quality Assurance diploma and project management internships, and I enjoy working between business and technical teams while supporting the end users who rely on the system.
@@ -268,7 +329,7 @@
 					</div>
 					<div class="about-stats" data-reveal>
 						<div class="stat"><span class="stat-num" data-since="2024-10">2</span><span class="stat-plus">+</span><span class="stat-label">Years in ERP</span></div>
-						<div class="stat"><span class="stat-num" data-count="7">7</span><span class="stat-label">Odoo modules configured</span></div>
+						<div class="stat"><span class="stat-num" data-count="10">10</span><span class="stat-label">Odoo modules configured</span></div>
 						<div class="stat"><span class="stat-num" data-count="3">3</span><span class="stat-label">Projects built</span></div>
 						<div class="stat"><span class="stat-num" data-count-certs>20</span><span class="stat-label">Certificates &amp; credentials</span></div>
 					</div>
@@ -289,7 +350,7 @@
 						<div class="col-sm-4">
 							<div class="single-horizontal-timeline" data-reveal>
 								<div class="experience-time">
-									<h2>Passing Year - 2026</h2>
+									<h2>Completed - 2026</h2>
 									<h3>Bachelor <span>of </span> Information Management</h3>
 								</div><!--/.experience-time-->
 								<div class="timeline-horizontal-border">
@@ -302,7 +363,7 @@
 											Affiliated to Tribhuvan University
 										</h4>
 										<h5>St.Xavier's College, Maitighar,Kathmandu</h5>
-										
+										<p class="description">CGPA 3.85</p>
 									</div><!--/.timeline-content-->
 								</div><!--/.timeline-->
 							</div>
@@ -333,9 +394,6 @@
 								<div class="experience-time">
 									<h2>Passing Year - 2017</h2>
 									<h3>Secondary Education Examination <span>(SEE)</span></h3>
-									<p class="description">
-											3.85
-									</p>
 								</div><!--/.experience-time-->
 								<div class="timeline-horizontal-border">
 									<i class="fa fa-circle" aria-hidden="true"></i>
@@ -348,9 +406,6 @@
 											SEE Board
 										</h4>
 										<h5>Rhododendron International Higher Secondary Boarding School</h5>
-										<p class="description">
-											3.75
-										</p>
 									</div><!--/.timeline-content-->
 								</div><!--/.timeline-->
 							</div>
@@ -371,91 +426,42 @@
 					</div>
 					<div class="container">
 						<div class="skill-groups">
-						<div class="row">
-							<div class="col-md-4 col-sm-6">
-								<div class="skill-group tilt-card" data-reveal>
-									<h3><i class="fa fa-sitemap" aria-hidden="true"></i>ERP &amp; Business Analysis</h3>
-									<ul class="skill-chips">
-											<li>ERP Business Analysis</li>
-											<li>Odoo Functional Consulting</li>
-											<li>ERP Implementation</li>
-											<li>Requirement Gathering</li>
-											<li>Business Process Mapping</li>
-											<li>Gap Analysis</li>
-											<li>Workflow Configuration</li>
-									</ul>
-								</div>
-							</div>
-							<div class="col-md-4 col-sm-6">
-								<div class="skill-group tilt-card" data-reveal>
-									<h3><i class="fa fa-cubes" aria-hidden="true"></i>Odoo Modules</h3>
-									<ul class="skill-chips">
-											<li>CRM</li>
-											<li>Sales</li>
-											<li>Purchase</li>
-											<li>Inventory</li>
-											<li>HR</li>
-											<li>Payroll</li>
-											<li>Project Management</li>
-									</ul>
-								</div>
-							</div>
-							<div class="col-md-4 col-sm-6">
-								<div class="skill-group tilt-card" data-reveal>
-									<h3><i class="fa fa-file-text-o" aria-hidden="true"></i>Documentation</h3>
-									<ul class="skill-chips">
-											<li>BRD</li>
-											<li>Functional Specifications</li>
-											<li>User Manuals</li>
-											<li>SOPs</li>
-											<li>Process Flows</li>
-											<li>Test Cases</li>
-									</ul>
-								</div>
-							</div>
-							<div class="col-md-4 col-sm-6">
-								<div class="skill-group tilt-card" data-reveal>
-									<h3><i class="fa fa-check-square-o" aria-hidden="true"></i>Testing &amp; Delivery</h3>
-									<ul class="skill-chips">
-											<li>Functional Testing</li>
-											<li>UAT Coordination</li>
-											<li>User Training</li>
-											<li>Issue Resolution</li>
-											<li>Troubleshooting</li>
-											<li>Postman</li>
-									</ul>
-								</div>
-							</div>
-							<div class="col-md-4 col-sm-6">
-								<div class="skill-group tilt-card" data-reveal>
-									<h3><i class="fa fa-wrench" aria-hidden="true"></i>Tools &amp; Technology</h3>
-									<ul class="skill-chips">
-											<li>MySQL</li>
-											<li>MongoDB</li>
-											<li>Git</li>
-											<li>GitHub</li>
-											<li>ClickUp</li>
-											<li>Google Docs</li>
-											<li>Microsoft Excel</li>
-									</ul>
-								</div>
-							</div>
-							<div class="col-md-4 col-sm-6">
-								<div class="skill-group tilt-card" data-reveal>
-									<h3><i class="fa fa-users" aria-hidden="true"></i>Professional Strengths</h3>
-									<ul class="skill-chips">
-											<li>Stakeholder Communication</li>
-											<li>Project Coordination</li>
-											<li>Analytical Thinking</li>
-											<li>Problem Solving</li>
-											<li>Time Management</li>
-											<li>Adaptability</li>
-											<li>Attention to Detail</li>
-											<li>Client Handling</li>
-									</ul>
-								</div>
-							</div>
-						</div><!-- /.row -->
+						<div class="deck" data-deck="skills" data-autoplay aria-roledescription="carousel" aria-label="Skill groups" data-reveal>
+						<div class="deck-stage" tabindex="0">
+							<article class="skill-group deck-card" style="--c:#0060c7" data-title="ERP &amp; Business Analysis">
+								<h3><i class="fa fa-sitemap" aria-hidden="true"></i>ERP &amp; Business Analysis</h3>
+								<ul class="skill-chips"><li>ERP Business Analysis</li><li>Odoo Functional Consulting</li><li>ERP Implementation</li><li>Requirement Gathering</li><li>Business Process Mapping</li><li>Gap Analysis</li><li>Workflow Configuration</li></ul>
+							</article>
+							<article class="skill-group deck-card" style="--c:#7c5cff" data-title="Odoo Modules">
+								<h3><i class="fa fa-cubes" aria-hidden="true"></i>Odoo Modules</h3>
+								<ul class="skill-chips"><li>CRM</li><li>Sales</li><li>Purchase</li><li>Inventory</li><li>Accounting</li><li>Manufacturing</li><li>HR</li><li>Payroll</li><li>Expenses</li><li>Project Management</li></ul>
+							</article>
+							<article class="skill-group deck-card" style="--c:#0aa5a5" data-title="Documentation">
+								<h3><i class="fa fa-file-text-o" aria-hidden="true"></i>Documentation</h3>
+								<ul class="skill-chips"><li>BRD</li><li>Functional Specifications</li><li>User Manuals</li><li>SOPs</li><li>Process Flows</li><li>Test Cases</li></ul>
+							</article>
+							<article class="skill-group deck-card" style="--c:#f08a24" data-title="Testing &amp; Delivery">
+								<h3><i class="fa fa-check-square-o" aria-hidden="true"></i>Testing &amp; Delivery</h3>
+								<ul class="skill-chips"><li>Functional Testing</li><li>UAT Coordination</li><li>User Training</li><li>Issue Resolution</li><li>Troubleshooting</li><li>Postman</li></ul>
+							</article>
+							<article class="skill-group deck-card" style="--c:#d6409f" data-title="Tools &amp; Technology">
+								<h3><i class="fa fa-wrench" aria-hidden="true"></i>Tools &amp; Technology</h3>
+								<ul class="skill-chips"><li>MySQL</li><li>MongoDB</li><li>Git</li><li>GitHub</li><li>ClickUp</li><li>Google Docs</li><li>Microsoft Excel</li></ul>
+							</article>
+							<article class="skill-group deck-card" style="--c:#1f9d55" data-title="Professional Strengths">
+								<h3><i class="fa fa-users" aria-hidden="true"></i>Professional Strengths</h3>
+								<ul class="skill-chips"><li>Stakeholder Communication</li><li>Project Coordination</li><li>Analytical Thinking</li><li>Problem Solving</li><li>Time Management</li><li>Adaptability</li><li>Attention to Detail</li><li>Client Handling</li></ul>
+							</article>
+						</div>
+						<div class="deck-ui">
+							<button type="button" class="deck-btn deck-prev" aria-label="Previous card">&lsaquo;</button>
+							<div class="deck-dots"></div>
+							<button type="button" class="deck-btn deck-next" aria-label="Next card">&rsaquo;</button>
+						</div>
+						<p class="deck-hint">Drag, swipe, or use the arrows</p>
+						<button type="button" class="deck-toggle" aria-pressed="false">Show all as a grid</button>
+						<p class="sr-only deck-live" role="status" aria-live="polite"></p>
+					</div>
 						</div><!-- /.skill-groups -->
 					</div>	<!-- /.container -->		
 				</div><!-- /.skill-content-->
@@ -471,77 +477,60 @@
 				</div>
 				<div class="container">
 					<div class="experience-content">
-						<div class="xp-timeline">
-							<span class="xp-line-fill" aria-hidden="true"></span>
-							<ol class="xp-list">
-							<li class="xp-item" data-reveal>
-								<div class="xp-when"><span class="xp-date">Jun 2026 &ndash; Present</span><span class="xp-state">Current</span></div>
-								<span class="xp-dot" aria-hidden="true"></span>
-								<article class="xp-card">
-									<h3>ERP Business Analyst</h3>
-									<h4>Nexus Incorporation Pvt. Ltd.</h4>
-									<ul class="xp-points">
-											<li>Analyze business requirements and translate them into practical ERP workflows and functional solutions.</li>
-											<li>Conduct requirement gathering, process analysis, gap analysis and workflow mapping.</li>
-											<li>Prepare BRDs, functional specifications, test cases, process flows and user documentation.</li>
-											<li>Configure and validate ERP processes based on business requirements and standard functionality.</li>
-											<li>Coordinate with developers and stakeholders on customizations, enhancements and issue resolution.</li>
-											<li>Perform functional testing and UAT while supporting implementation and post-implementation activities.</li>
-									</ul>
+						<div class="xs-wrap">
+							<ol class="xs-list">
+							<li class="xs-item" style="--i:0">
+								<article class="xs-card" data-reveal>
+									<div class="xs-side"><span class="xs-num" aria-hidden="true">01</span><span class="xs-date">Jun 2026 &ndash; Present</span><span class="xs-state">Current</span></div>
+									<div class="xs-body">
+										<h3>ERP Business Analyst</h3>
+										<h4>Nexus Incorporation Pvt. Ltd.</h4>
+										<ul class="xp-points"><li>Analyze business requirements and translate them into practical ERP workflows and functional solutions.</li><li>Conduct requirement gathering, process analysis, gap analysis and workflow mapping.</li><li>Prepare BRDs, functional specifications, test cases, process flows and user documentation.</li><li>Configure and validate ERP processes based on business requirements and standard functionality.</li><li>Coordinate with developers and stakeholders on customizations, enhancements and issue resolution.</li><li>Perform functional testing and UAT while supporting implementation and post-implementation activities.</li></ul>
+									</div>
 								</article>
 							</li>
-							<li class="xp-item" data-reveal>
-								<div class="xp-when"><span class="xp-date">Jan 2025 &ndash; Jun 2026</span></div>
-								<span class="xp-dot" aria-hidden="true"></span>
-								<article class="xp-card">
-									<h3>Functional Consultant</h3>
-									<h4>Innovax Solutions Pvt. Ltd.</h4>
-									<ul class="xp-points">
-											<li>Coordinated Odoo ERP implementation projects, requirements, timelines and client deliverables.</li>
-											<li>Conducted requirement gathering, gap analysis and workflow design across business functions.</li>
-											<li>Prepared BRDs, functional specifications, process flows, user manuals and implementation documentation.</li>
-											<li>Configured and validated Odoo modules including CRM, Sales, Purchase, Inventory, HR, Payroll and Project Management.</li>
-											<li>Coordinated with developers on customizations, enhancements, integrations, testing and issue resolution.</li>
-											<li>Supported UAT, user training, go-live activities and post-implementation assistance.</li>
-									</ul>
+							<li class="xs-item" style="--i:1">
+								<article class="xs-card" data-reveal>
+									<div class="xs-side"><span class="xs-num" aria-hidden="true">02</span><span class="xs-date">Jan 2025 &ndash; Jun 2026</span></div>
+									<div class="xs-body">
+										<h3>Functional Consultant</h3>
+										<h4>Innovax Solutions Pvt. Ltd.</h4>
+										<ul class="xp-points"><li>Coordinated Odoo ERP implementation projects, requirements, timelines and client deliverables.</li><li>Conducted requirement gathering, gap analysis and workflow design across business functions.</li><li>Prepared BRDs, functional specifications, process flows, user manuals and implementation documentation.</li><li>Configured and validated Odoo modules including CRM, Sales, Purchase, Inventory, Accounting, Manufacturing, HR, Payroll, Expenses and Project Management.</li><li>Coordinated with developers on customizations, enhancements, integrations, testing and issue resolution.</li><li>Supported UAT, user training, go-live activities and post-implementation assistance.</li></ul>
+									</div>
 								</article>
 							</li>
-							<li class="xp-item" data-reveal>
-								<div class="xp-when"><span class="xp-date">Oct 2024 &ndash; Jan 2025</span></div>
-								<span class="xp-dot" aria-hidden="true"></span>
-								<article class="xp-card">
-									<h3>Functional Consultant Intern</h3>
-									<h4>Innovax Solutions Pvt. Ltd.</h4>
-									<ul class="xp-points">
-											<li>Assisted in Odoo implementation, functional testing, requirement analysis and documentation.</li>
-											<li>Supported user manuals, implementation notes, defect tracking, client demonstrations and training.</li>
-									</ul>
+							<li class="xs-item" style="--i:2">
+								<article class="xs-card" data-reveal>
+									<div class="xs-side"><span class="xs-num" aria-hidden="true">03</span><span class="xs-date">Oct 2024 &ndash; Jan 2025</span></div>
+									<div class="xs-body">
+										<h3>Functional Consultant Intern</h3>
+										<h4>Innovax Solutions Pvt. Ltd.</h4>
+										<ul class="xp-points"><li>Assisted in Odoo implementation, functional testing, requirement analysis and documentation.</li><li>Supported user manuals, implementation notes, defect tracking, client demonstrations and training.</li></ul>
+									</div>
 								</article>
 							</li>
-							<li class="xp-item" data-reveal>
-								<div class="xp-when"><span class="xp-date">2024 &ndash; 2025</span></div>
-								<span class="xp-dot" aria-hidden="true"></span>
-								<article class="xp-card">
-									<h3>Project Manager Associate Intern</h3>
-									<h4>Voyager IT Company</h4>
-									<ul class="xp-points">
-											<li>Worked as a project manager associate intern at Voyager IT Company.</li>
-									</ul>
+							<li class="xs-item" style="--i:3">
+								<article class="xs-card" data-reveal>
+									<div class="xs-side"><span class="xs-num" aria-hidden="true">04</span><span class="xs-date">2024 &ndash; 2025</span></div>
+									<div class="xs-body">
+										<h3>Project Manager Associate Intern</h3>
+										<h4>Voyager IT Company</h4>
+										<ul class="xp-points"><li>Worked as a project manager associate intern at Voyager IT Company.</li></ul>
+									</div>
 								</article>
 							</li>
-							<li class="xp-item" data-reveal>
-								<div class="xp-when"><span class="xp-date">Completed Mar 2025</span></div>
-								<span class="xp-dot" aria-hidden="true"></span>
-								<article class="xp-card">
-									<h3>Project Management Associate Intern (Virtual)</h3>
-									<h4>Excelerate &times; Saint Louis University</h4>
-									<ul class="xp-points">
-											<li>Completed the Project Management Associate internship powered by Excelerate, in partnership with Saint Louis University.</li>
-									</ul>
+							<li class="xs-item" style="--i:4">
+								<article class="xs-card" data-reveal>
+									<div class="xs-side"><span class="xs-num" aria-hidden="true">05</span><span class="xs-date">Completed Mar 2025</span></div>
+									<div class="xs-body">
+										<h3>Project Management Associate Intern (Virtual)</h3>
+										<h4>Excelerate &times; Saint Louis University</h4>
+										<ul class="xp-points"><li>Completed the Project Management Associate internship powered by Excelerate, in partnership with Saint Louis University.</li></ul>
+									</div>
 								</article>
 							</li>
 							</ol>
-						</div><!--/.xp-timeline-->
+						</div><!--/.xs-wrap-->
 					</div><!--.experience-content-->
 				</div>
 			</div>
@@ -554,32 +543,39 @@
 			</div>
 			<div class="container">
 				<div class="projects-content">
-					<div class="row">
-						<div class="col-md-4 col-sm-6">
-								<article class="project-card tilt-card" data-reveal>
-									<h3>EduSanchal</h3>
-									<span class="project-type">School Management System</span>
-									<p>Developed role-based workflows for Admin, Teacher and Student users, including attendance and scheduling.</p>
-									<ul class="pc-tags"><li>Role-based access</li><li>Attendance</li><li>Scheduling</li></ul>
-								</article>
-							</div>
-							<div class="col-md-4 col-sm-6">
-								<article class="project-card tilt-card" data-reveal>
-									<h3>Doctor Appointment System</h3>
-									<span class="project-type">Healthcare booking</span>
-									<p>Built secure workflows with authentication and structured data handling.</p>
-									<ul class="pc-tags"><li>Authentication</li><li>Secure workflows</li><li>Structured data</li></ul>
-								</article>
-							</div>
-							<div class="col-md-4 col-sm-6">
-								<article class="project-card tilt-card" data-reveal>
-									<h3>SwadExpress</h3>
-									<span class="project-type">Food Delivery System</span>
-									<p>Developed order management workflows and database-driven operations.</p>
-									<ul class="pc-tags"><li>Order management</li><li>Database-driven</li></ul>
-								</article>
-							</div>
-					</div><!--/.row-->
+					<div class="deck" data-deck="projects" aria-roledescription="carousel" aria-label="Projects" data-reveal>
+						<div class="deck-stage" tabindex="0">
+							<article class="project-card deck-card" style="--c:#0060c7" data-title="EduSanchal">
+								<span class="project-no" aria-hidden="true">01</span>
+								<h3>EduSanchal</h3>
+								<span class="project-type">School Management System</span>
+								<p>Developed role-based workflows for Admin, Teacher and Student users, including attendance and scheduling.</p>
+								<ul class="pc-tags"><li>Role-based access</li><li>Attendance</li><li>Scheduling</li></ul>
+							</article>
+							<article class="project-card deck-card" style="--c:#7c5cff" data-title="Doctor Appointment System">
+								<span class="project-no" aria-hidden="true">02</span>
+								<h3>Doctor Appointment System</h3>
+								<span class="project-type">Healthcare booking</span>
+								<p>Built secure workflows with authentication and structured data handling.</p>
+								<ul class="pc-tags"><li>Authentication</li><li>Secure workflows</li><li>Structured data</li></ul>
+							</article>
+							<article class="project-card deck-card" style="--c:#f08a24" data-title="SwadExpress">
+								<span class="project-no" aria-hidden="true">03</span>
+								<h3>SwadExpress</h3>
+								<span class="project-type">Food Delivery System</span>
+								<p>Developed order management workflows and database-driven operations.</p>
+								<ul class="pc-tags"><li>Order management</li><li>Database-driven</li></ul>
+							</article>
+						</div>
+						<div class="deck-ui">
+							<button type="button" class="deck-btn deck-prev" aria-label="Previous card">&lsaquo;</button>
+							<div class="deck-dots"></div>
+							<button type="button" class="deck-btn deck-next" aria-label="Next card">&rsaquo;</button>
+						</div>
+						<p class="deck-hint">Drag, swipe, or use the arrows</p>
+						<button type="button" class="deck-toggle" aria-pressed="false">Show all as a grid</button>
+						<p class="sr-only deck-live" role="status" aria-live="polite"></p>
+					</div>
 					<p class="projects-more" data-reveal><a href="https://github.com/RoozaStha" target="_blank" rel="noopener">See more on GitHub</a></p>
 				</div><!--/.projects-content-->
 			</div><!--/.container-->
@@ -830,7 +826,7 @@
 						<div class="col-md-offset-1 col-md-5 col-sm-6">
 							<div class="single-contact-box" data-reveal="left">
 								<div class="contact-form">
-										<form id="myForm" action="https://formspree.io/f/https://formspree.io/f/mgaaaley" method="post" name="form" novalidate>
+										<form id="myForm" action="https://formspree.io/f/mgaaaley" method="post" name="form" novalidate>
 										<div class="hp-field" aria-hidden="true"><label>Leave this field empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
 										<input type="hidden" name="_subject" value="New message from rojashrestha.com.np">
 										<div class="row">
@@ -866,12 +862,13 @@
 										<div class="row">
 											<div class="col-sm-12">
 												<div class="single-contact-btn">
-													<input type="submit" class="contact-btn" value="Send message" name="submit">
+													<input type="submit" class="contact-btn" value="Send message">
 												</div><!--/.single-single-contact-btn-->
 											</div><!--/.col-->
 										</div><!--/.row-->
 										<div class="form-status" id="formStatus" role="status" aria-live="polite" hidden></div>
 									</form><!--/form-->
+									<iframe name="contactFallback" id="contactFallback" class="hp-field" tabindex="-1" aria-hidden="true" title="Contact form response"></iframe>
 								</div><!--/.contact-form-->
 							</div><!--/.single-contact-box-->
 						</div><!--/.col-->
@@ -1073,6 +1070,7 @@
 		<script data-cfasync="false" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 		<script data-cfasync="false" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
 		<script data-cfasync="false" src="assets/js/motion.js"></script>
+		<script data-cfasync="false" src="assets/js/advanced.js"></script>
 		<script data-cfasync="false" src="assets/js/certs.js"></script>
 		<script data-cfasync="false" src="assets/js/contact.js"></script>
 		
@@ -1086,7 +1084,7 @@
 
   gtag('config', 'G-MQW7DFR2LT');
 </script>
-<!-- committ  -->
+<!-- commit  -->
     </body>
 	
 </html>
