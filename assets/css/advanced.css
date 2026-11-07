@@ -390,8 +390,90 @@
 .single-about-img { overflow: hidden; }
 .section-heading h2 .ch { display: inline-block; white-space: pre; }
 
+/* 6. Spacing system + layout fixes ------------------------------------------------ */
+:root { --sec-top: 60px; --sec-bottom: 84px; --sec-gap: 64px; }
+.about, .experience, .projects, .portfolio, .profiles, .contact { padding-top: var(--sec-top); padding-bottom: var(--sec-bottom); }
+.skill-content { padding-top: var(--sec-top); padding-bottom: var(--sec-bottom); }
+.education { padding-top: var(--sec-top); }
+.education-horizontal-timeline { padding: var(--sec-gap) 0 calc(var(--sec-gap) - 4px); }
+.section-heading h2 { padding-bottom: 40px; }
+.about-content, .experience-content, .portfolio-content, .profiles-content, .projects-content, .skill-groups, .single-contact-box { padding-top: var(--sec-gap); }
+.about-stats { margin-top: 64px; }
+.projects-more { margin-top: 26px; }
+.more-certs { margin-top: 48px; padding-top: 36px; }
+.skills, .projects { overflow-x: clip; }              /* the 3D side cards must not widen the page */
+.deck-active .deck-card { width: min(470px, 86vw); }
+.deck-active .deck-ui { margin-top: 22px; }
+
+/* experience cards: text sits in the middle so short cards do not look empty */
+.xs-body { display: flex; flex-direction: column; justify-content: center; }
+.xs-item:last-child { margin-bottom: 0 !important; }
+
+/* certificates: 4 across, last row centred (no lonely gap on the right) */
+.cert-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 26px; }
+.cert-card { flex: 0 1 calc((100% - 78px) / 4); min-width: 0; }
+@media (max-width: 1199px) { .cert-card { flex-basis: calc((100% - 52px) / 3); } }
+@media (max-width: 991px)  { .cert-card { flex-basis: calc((100% - 26px) / 2); } }
+@media (max-width: 520px)  { .cert-card { flex-basis: 100%; } }
+
+@media (max-width: 767px) {
+  :root { --sec-top: 44px; --sec-bottom: 60px; --sec-gap: 44px; }
+  .section-heading h2 { padding-bottom: 30px; }
+  .about-stats { margin-top: 44px; }
+}
+
+/* 7. Bring Ro back --------------------------------------------------------------------- */
+.guide-launcher { display: none; }
+.motion-ready .guide-launcher.is-on {
+  position: fixed;
+  left: 18px;
+  bottom: 18px;
+  z-index: 9000;
+  display: block;
+  width: 58px;
+  height: 58px;
+  padding: 0;
+  background: none;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 12px 28px rgba(60, 30, 200, 0.42);
+}
+.guide-launcher::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid rgba(124, 92, 255, 0.7);
+  animation: m-launcher-ping 2.4s ease-out infinite;
+  pointer-events: none;
+}
+@keyframes m-launcher-ping { 0% { transform: scale(1); opacity: 0.9; } 100% { transform: scale(1.7); opacity: 0; } }
+.guide-launcher::after {
+  content: attr(data-tip);
+  position: absolute;
+  left: 70px;
+  top: 50%;
+  padding: 6px 12px;
+  font-size: 12.5px;
+  font-weight: 500;
+  white-space: nowrap;
+  color: #fff;
+  background: rgba(20, 16, 90, 0.94);
+  border-radius: 8px;
+  opacity: 0;
+  transform: translate(-6px, -50%);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.guide-launcher:hover::after, .guide-launcher:focus-visible::after { opacity: 1; transform: translate(0, -50%); }
+@media (max-width: 767px) { .motion-ready .guide-launcher.is-on { left: 10px; bottom: 12px; width: 50px; height: 50px; } .guide-launcher svg { width: 50px; height: 50px; } }
+
+/* 8. Contact: the "email me instead" link inside the status box */
+.form-status a.form-mail { margin-left: 4px; font-weight: 600; color: inherit; text-decoration: underline; background: none; }
+
 /* reduced motion: show everything calmly */
 @media (prefers-reduced-motion: reduce) {
-  .guide, .side-nav, .cursor-ring { display: none !important; }
+  .guide, .guide-launcher, .side-nav, .cursor-ring { display: none !important; }
   .xs-item { position: relative !important; top: auto !important; }
 }

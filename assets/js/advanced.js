@@ -321,9 +321,8 @@
   ];
 
   function makeGuide() {
-    var guide = qs('.guide');
+    var guide = qs('.guide'), launcher = qs('.guide-launcher');
     if (!guide) return function () {};
-    try { if (window.sessionStorage.getItem('guideClosed') === '1') { guide.style.display = 'none'; return function () {}; } } catch (e) { /* ignore */ }
 
     var btn = qs('.guide-char', guide), bubble = qs('.guide-bubble', guide), text = qs('.guide-text', guide), closeBtn = qs('.guide-close', guide);
     var svg = qs('svg', guide);
@@ -331,15 +330,18 @@
     var eyes = qs('.ro-eyes', svg), pupils = qsa('.ro-pupil', svg), mouth = qs('.ro-mouth', svg);
     var armR = qs('.ro-arm-r', svg), armL = qs('.ro-arm-l', svg);
 
-    var cleanups = [], tw = null, hideCall = null, lastSection = null, extraIdx = 0, alive = true, started = false;
+    var tw = null, hideCall = null, blinkCall = null, lastSection = null, extraIdx = 0;
+    var alive = false, started = false, closed = false;
+    try { closed = window.sessionStorage.getItem('guideClosed') === '1'; } catch (e) { /* ignore */ }
 
     gsap.set(guide, { yPercent: 130, opacity: 0 });
     gsap.set(eyes, { svgOrigin: '90 80' });
     gsap.set(armR, { svgOrigin: '137.5 146' });
     gsap.set(armL, { svgOrigin: '42.5 146' });
     gsap.set(mouth, { svgOrigin: '90 102' });
+    if (closed) guide.style.display = 'none';
 
-    /* idle life */
+    /* idle life (paused while Ro is hidden) */
     var idle = gsap.timeline({ paused: true });
     idle.to(floatG, { y: -7, duration: 1.5, ease: 'sine.inOut', yoyo: true, repeat: -1 }, 0)
         .to(shadow, { scaleX: 0.86, opacity: 0.7, svgOrigin: '90 222', duration: 1.5, ease: 'sine.inOut', yoyo: true, repeat: -1 }, 0)
@@ -348,7 +350,7 @@
 
     function blink() {
       if (!alive) return;
-      gsap.timeline({ onComplete: function () { gsap.delayedCall(rand(2.2, 5.5), blink); } })
+      gsap.timeline({ onComplete: function () { if (alive) blinkCall = gsap.delayedCall(rand(2.2, 5.5), blink); } })
         .to(eyes, { scaleY: 0.08, duration: 0.07, ease: 'power1.in' })
         .to(eyes, { scaleY: 1, duration: 0.12, ease: 'power1.out' });
     }
@@ -357,13 +359,13 @@
     var px = pupils.map(function (p) { return gsap.quickTo(p, 'x', { duration: 0.25, ease: 'power3' }); });
     var py = pupils.map(function (p) { return gsap.quickTo(p, 'y', { duration: 0.25, ease: 'power3' }); });
     function look(e) {
+      if (!alive) return;
       var r = btn.getBoundingClientRect();
       var cx = r.left + r.width * 0.5, cy = r.top + r.height * 0.36;
       var dx = e.clientX - cx, dy = e.clientY - cy;
       var dist = Math.max(1, Math.sqrt(dx * dx + dy * dy));
       var k = Math.min(1, dist / 260) * 5;
-      var x = (dx / dist) * k, y = (dy / dist) * k;
-      px.forEach(function (f) { f(x); }); py.forEach(function (f) { f(y); });
+      px.forEach(function (f) { f((dx / dist) * k); }); py.forEach(function (f) { f((dy / dist) * k); });
     }
     if (finePointer) window.addEventListener('pointermove', look, { passive: true });
 
@@ -398,6 +400,44 @@
       hideCall = gsap.delayedCall(window.innerWidth < 768 ? 4.2 : Math.max(5.5, msg.length * 0.07), hide);
     }
 
+    /* the small button that brings Ro back after the x */
+    function showLauncher() {
+      if (!launcher) return;
+      launcher.classList.add('is-on');
+      gsap.fromTo(launcher, { scale: 0, rotation: -40 }, { scale: 1, rotation: 0, duration: 0.7, ease: 'back.out(2.2)' });
+    }
+    function hideLauncher() {
+      if (!launcher) return;
+      gsap.to(launcher, { scale: 0, duration: 0.25, ease: 'power2.in', onComplete: function () { launcher.classList.remove('is-on'); } });
+    }
+
+    function openGuide(first) {
+      if (alive) return;
+      alive = true; closed = false;
+      try { window.sessionStorage.removeItem('guideClosed'); } catch (e) { /* ignore */ }
+      hideLauncher();
+      guide.style.display = 'block';
+      gsap.set(guide, { yPercent: 130, opacity: 0 });
+      gsap.to(guide, {
+        yPercent: 0, opacity: 1, duration: 0.9, ease: 'back.out(1.5)', delay: first ? 0.6 : 0.15,
+        onComplete: function () {
+          idle.play(); blink(); wave();
+          var cur = lastSection && SECTION_TIPS[lastSection] ? lastSection : 'welcome-hero';
+          say(first ? SECTION_TIPS['welcome-hero'] : (cur === 'welcome-hero' ? 'I\u2019m back! Scroll down and I\u2019ll show you around.' : 'I\u2019m back! ' + SECTION_TIPS[cur]), false);
+        }
+      });
+    }
+    function closeGuide() {
+      if (!alive) return;
+      alive = false; closed = true;
+      try { window.sessionStorage.setItem('guideClosed', '1'); } catch (e) { /* ignore */ }
+      if (hideCall) hideCall.kill();
+      if (tw) tw.kill();
+      if (blinkCall) blinkCall.kill();
+      idle.pause();
+      gsap.to(guide, { yPercent: 130, opacity: 0, duration: 0.5, ease: 'power3.in', onComplete: function () { guide.style.display = 'none'; showLauncher(); } });
+    }
+
     /* section-aware tips */
     var sts = Object.keys(SECTION_TIPS).map(function (id) {
       var el = document.getElementById(id);
@@ -405,38 +445,36 @@
       return ScrollTrigger.create({
         trigger: el, start: 'top 55%', end: 'bottom 55%',
         onToggle: function (self) {
-          if (self.isActive && started && lastSection !== id) {
-            say(SECTION_TIPS[id], lastSection !== null);
-          }
-          if (self.isActive) lastSection = id;
+          if (!self.isActive) return;
+          if (started && alive && lastSection !== id) say(SECTION_TIPS[id], lastSection !== null);
+          lastSection = id;
         }
       });
     });
 
-    /* react to the decks */
     function onDeck(e) {
-      if (!started || !e.detail || e.detail.index == null) return;
+      if (!alive || !e.detail || e.detail.index == null) return;
       if (Math.random() < 0.35) wave();
     }
     document.addEventListener('deck:change', onDeck);
 
     function nextTip() {
+      if (!alive) return;
       var msg = EXTRA_TIPS[extraIdx % EXTRA_TIPS.length];
       extraIdx++;
       say(msg, true);
     }
     btn.addEventListener('click', nextTip);
-    closeBtn.addEventListener('click', function () {
-      alive = false;
-      try { window.sessionStorage.setItem('guideClosed', '1'); } catch (e) { /* ignore */ }
-      gsap.to(guide, { yPercent: 130, opacity: 0, duration: 0.5, ease: 'power3.in', onComplete: function () { guide.style.display = 'none'; } });
-    });
+    closeBtn.addEventListener('click', closeGuide);
+    if (launcher) launcher.addEventListener('click', function () { openGuide(false); });
 
     /* enter once the page has finished its intro */
     function start() {
       if (started) return;
       started = true;
-      gsap.to(guide, { yPercent: 0, opacity: 1, duration: 0.9, ease: 'back.out(1.5)', delay: 0.6, onComplete: function () { idle.play(); blink(); wave(); say(SECTION_TIPS['welcome-hero'], false); lastSection = 'welcome-hero'; } });
+      if (closed) { showLauncher(); return; }
+      lastSection = 'welcome-hero';
+      openGuide(true);
     }
     if (window.__portfolioReady) start(); else document.addEventListener('portfolio:ready', start, { once: true });
 
@@ -449,7 +487,8 @@
       document.removeEventListener('portfolio:ready', start);
       if (hideCall) hideCall.kill();
       if (tw) tw.kill();
-      gsap.killTweensOf([guide, bubble, floatG, shadow, glow, bulb, eyes, mouth, armR, armL].concat(pupils));
+      if (blinkCall) blinkCall.kill();
+      gsap.killTweensOf([guide, bubble, launcher, floatG, shadow, glow, bulb, eyes, mouth, armR, armL].concat(pupils));
     };
   }
 
